@@ -1,6 +1,9 @@
 ENTRY(Reset_Handler)
 
-/* Depends on MCU can be copied from STM32CubeIDE as reference */
+/*
+* Linker script for MCU - Depending on the board 
+* Copied from STM32CubeIDE
+*/
 
 MEMORY {
     FLASH(rx):ORIGIN=0x08000000,LENGTH=512K
