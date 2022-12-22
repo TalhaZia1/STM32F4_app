@@ -1,6 +1,6 @@
 # STM32F4_bareMetal
 ARM Cortex M4 Microcontroller BareMetal setup
 
--> Debugger used is STM32CudeIDE 
--> Compiler used in Waf Script 
--> HAL Libraries 
+-> Support of HAL Libraries and CMSIS
+-> Compiler Cmake
+-> .elf external debugging in Keil uVision or STM32CubeIDE
