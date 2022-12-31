@@ -24,4 +24,15 @@ void HAL_MspInit(void) {
 
 void HAL_UART_MspInit(UART_HandleTypeDef *huart) {
     __HAL_RCC_USART2_CLK_ENABLE();
+    GPIO_InitTypeDef gpio_uart;
+    /* UART2 - TX*/
+    gpio_uart.Pin = GPIO_PIN_2; 
+    gpio_uart.Mode = GPIO_MODE_AF_PP;
+    gpio_uart.Pull = GPIO_PULLUP; 
+    gpio_uart.Speed = GPIO_SPEED_FREQ_LOW;
+    gpio_uart.Alternate = GPIO_AF7_USART2; 
+    HAL_GPIO_Init(GPIOA, &gpio_uart); 
+    /* UART2 - RX */
+    gpio_uart.Pin = GPIO_PIN_3; 
+    HAL_GPIO_Init(GPIOA, &gpio_uart); 
 }

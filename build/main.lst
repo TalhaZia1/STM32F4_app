@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cchFONwC.s 			page 1
+ARM GAS  /tmp/ccmkwy84.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -28,193 +28,245 @@ ARM GAS  /tmp/cchFONwC.s 			page 1
   26              	SystemClock_Config:
   27              	.LFB131:
   28              		.file 1 "Core/Src/main.c"
-   1:Core/Src/main.c **** #include "stm32f4xx_hal.h"
-   2:Core/Src/main.c **** 
-   3:Core/Src/main.c **** void SystemClock_Config(void);
-   4:Core/Src/main.c **** void UART2_Init(void); 
-   5:Core/Src/main.c **** 
-   6:Core/Src/main.c **** int main(void) {
-   7:Core/Src/main.c ****   
-   8:Core/Src/main.c ****   HAL_Init();
-   9:Core/Src/main.c ****   SystemClock_Config();
-  10:Core/Src/main.c ****   UART2_Init();
+   1:Core/Src/main.c **** #include "main.h"
+   2:Core/Src/main.c **** #include "stm32f4xx_hal.h"
+   3:Core/Src/main.c **** 
+   4:Core/Src/main.c **** void SystemClock_Config(void);
+   5:Core/Src/main.c **** void UART2_Init(void); 
+   6:Core/Src/main.c **** void Error_handler(void);
+   7:Core/Src/main.c **** 
+   8:Core/Src/main.c **** UART_HandleTypeDef huart2;
+   9:Core/Src/main.c **** 
+  10:Core/Src/main.c **** int main(void) {
   11:Core/Src/main.c ****   
-  12:Core/Src/main.c ****   while (1) {
-  13:Core/Src/main.c **** 
-  14:Core/Src/main.c **** 
-  15:Core/Src/main.c ****   }
-  16:Core/Src/main.c ****   
-  17:Core/Src/main.c ****   return 0; 
-  18:Core/Src/main.c **** }
-  19:Core/Src/main.c **** 
-  20:Core/Src/main.c **** void SystemClock_Config(void) {
-  29              		.loc 1 20 31 view -0
+  12:Core/Src/main.c ****   HAL_Init();
+  13:Core/Src/main.c ****   SystemClock_Config();
+  14:Core/Src/main.c ****   UART2_Init();
+  15:Core/Src/main.c ****   
+  16:Core/Src/main.c ****   while (1);
+  17:Core/Src/main.c ****   
+  18:Core/Src/main.c ****   return 0; 
+  19:Core/Src/main.c **** }
+  20:Core/Src/main.c **** 
+  21:Core/Src/main.c **** void SystemClock_Config(void) {
+  29              		.loc 1 21 31 view -0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
   33              		@ link register save eliminated.
-  21:Core/Src/main.c **** 
-  22:Core/Src/main.c **** }
-  34              		.loc 1 22 1 view .LVU1
+  22:Core/Src/main.c **** 
+  23:Core/Src/main.c **** }
+  34              		.loc 1 23 1 view .LVU1
   35 0000 7047     		bx	lr
+ARM GAS  /tmp/ccmkwy84.s 			page 2
+
+
   36              		.cfi_endproc
-ARM GAS  /tmp/cchFONwC.s 			page 2
-
-
   37              	.LFE131:
-  39              		.section	.text.UART2_Init,"ax",%progbits
+  39              		.section	.text.Error_handler,"ax",%progbits
   40              		.align	1
-  41              		.global	UART2_Init
+  41              		.global	Error_handler
   42              		.syntax unified
   43              		.thumb
   44              		.thumb_func
   45              		.fpu fpv4-sp-d16
-  47              	UART2_Init:
-  48              	.LFB132:
-  23:Core/Src/main.c **** 
-  24:Core/Src/main.c **** void UART2_Init(void) {
-  49              		.loc 1 24 23 view -0
+  47              	Error_handler:
+  48              	.LFB133:
+  24:Core/Src/main.c **** 
+  25:Core/Src/main.c **** void UART2_Init(void) {
+  26:Core/Src/main.c **** 	huart2.Instance = USART2;
+  27:Core/Src/main.c **** 	huart2.Init.BaudRate = 115200;
+  28:Core/Src/main.c **** 	huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  29:Core/Src/main.c **** 	huart2.Init.StopBits = UART_STOPBITS_1;
+  30:Core/Src/main.c **** 	huart2.Init.Parity = UART_PARITY_NONE;
+  31:Core/Src/main.c **** 	huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  32:Core/Src/main.c **** 	huart2.Init.Mode = UART_MODE_TX_RX;
+  33:Core/Src/main.c **** 	if ( HAL_UART_Init(&huart2) != HAL_OK ) {
+  34:Core/Src/main.c **** 		Error_handler();
+  35:Core/Src/main.c **** 	}
+  36:Core/Src/main.c **** }
+  37:Core/Src/main.c **** 
+  38:Core/Src/main.c **** void Error_handler(void) {
+  49              		.loc 1 38 26 view -0
   50              		.cfi_startproc
-  51              		@ args = 0, pretend = 0, frame = 72
-  52              		@ frame_needed = 0, uses_anonymous_args = 0
-  53 0000 00B5     		push	{lr}
-  54              	.LCFI0:
-  55              		.cfi_def_cfa_offset 4
-  56              		.cfi_offset 14, -4
-  57 0002 93B0     		sub	sp, sp, #76
-  58              	.LCFI1:
-  59              		.cfi_def_cfa_offset 80
-  25:Core/Src/main.c ****   UART_HandleTypeDef huart2;
-  60              		.loc 1 25 3 view .LVU3
-  26:Core/Src/main.c ****   huart2.Instance = USART2;
-  61              		.loc 1 26 3 view .LVU4
-  62              		.loc 1 26 19 is_stmt 0 view .LVU5
-  63 0004 094B     		ldr	r3, .L6
-  64 0006 0193     		str	r3, [sp, #4]
-  27:Core/Src/main.c ****   huart2.Init.BaudRate = 115200; 
-  65              		.loc 1 27 3 is_stmt 1 view .LVU6
-  66              		.loc 1 27 24 is_stmt 0 view .LVU7
-  67 0008 4FF4E133 		mov	r3, #115200
-  68 000c 0293     		str	r3, [sp, #8]
-  28:Core/Src/main.c ****   huart2.Init.WordLength = UART_WORDLENGTH_8B; 
-  69              		.loc 1 28 3 is_stmt 1 view .LVU8
-  70              		.loc 1 28 26 is_stmt 0 view .LVU9
-  71 000e 0023     		movs	r3, #0
-  72 0010 0393     		str	r3, [sp, #12]
-  29:Core/Src/main.c ****   huart2.Init.StopBits = UART_STOPBITS_1;
-  73              		.loc 1 29 3 is_stmt 1 view .LVU10
-  74              		.loc 1 29 24 is_stmt 0 view .LVU11
-  75 0012 0493     		str	r3, [sp, #16]
-  30:Core/Src/main.c ****   huart2.Init.Parity = UART_PARITY_NONE;
-  76              		.loc 1 30 3 is_stmt 1 view .LVU12
-  77              		.loc 1 30 22 is_stmt 0 view .LVU13
-  78 0014 0593     		str	r3, [sp, #20]
-  31:Core/Src/main.c ****   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  79              		.loc 1 31 3 is_stmt 1 view .LVU14
-  80              		.loc 1 31 25 is_stmt 0 view .LVU15
-  81 0016 0793     		str	r3, [sp, #28]
-  32:Core/Src/main.c ****   huart2.Init.Mode = UART_MODE_TX_RX; 
-  82              		.loc 1 32 3 is_stmt 1 view .LVU16
-  83              		.loc 1 32 20 is_stmt 0 view .LVU17
-  84 0018 0C23     		movs	r3, #12
-  85 001a 0693     		str	r3, [sp, #24]
-ARM GAS  /tmp/cchFONwC.s 			page 3
+  51              		@ Volatile: function does not return.
+  52              		@ args = 0, pretend = 0, frame = 0
+  53              		@ frame_needed = 0, uses_anonymous_args = 0
+  54              		@ link register save eliminated.
+  55              	.L3:
+  39:Core/Src/main.c ****   while(1);
+  56              		.loc 1 39 3 discriminator 1 view .LVU3
+  57              		.loc 1 39 11 discriminator 1 view .LVU4
+  58              		.loc 1 39 8 discriminator 1 view .LVU5
+  59 0000 FEE7     		b	.L3
+  60              		.cfi_endproc
+  61              	.LFE133:
+  63              		.section	.text.UART2_Init,"ax",%progbits
+  64              		.align	1
+  65              		.global	UART2_Init
+  66              		.syntax unified
+  67              		.thumb
+  68              		.thumb_func
+  69              		.fpu fpv4-sp-d16
+  71              	UART2_Init:
+  72              	.LFB132:
+  25:Core/Src/main.c **** 	huart2.Instance = USART2;
+  73              		.loc 1 25 23 view -0
+  74              		.cfi_startproc
+  75              		@ args = 0, pretend = 0, frame = 0
+  76              		@ frame_needed = 0, uses_anonymous_args = 0
+  77 0000 08B5     		push	{r3, lr}
+  78              	.LCFI0:
+  79              		.cfi_def_cfa_offset 8
+ARM GAS  /tmp/ccmkwy84.s 			page 3
 
 
-  33:Core/Src/main.c ****   if (HAL_UART_Init(&huart2) != HAL_OK) {
-  86              		.loc 1 33 3 is_stmt 1 view .LVU18
-  87              		.loc 1 33 7 is_stmt 0 view .LVU19
-  88 001c 01A8     		add	r0, sp, #4
-  89 001e FFF7FEFF 		bl	HAL_UART_Init
-  90              	.LVL0:
-  91              		.loc 1 33 6 view .LVU20
-  92 0022 00B1     		cbz	r0, .L2
-  93              	.L4:
-  34:Core/Src/main.c ****     while(1) {
-  94              		.loc 1 34 5 is_stmt 1 discriminator 1 view .LVU21
-  35:Core/Src/main.c ****     }
-  95              		.loc 1 35 5 discriminator 1 view .LVU22
-  34:Core/Src/main.c ****     while(1) {
-  96              		.loc 1 34 10 discriminator 1 view .LVU23
-  97 0024 FEE7     		b	.L4
-  98              	.L2:
-  36:Core/Src/main.c ****   }
-  37:Core/Src/main.c **** }
-  99              		.loc 1 37 1 is_stmt 0 view .LVU24
- 100 0026 13B0     		add	sp, sp, #76
- 101              	.LCFI2:
- 102              		.cfi_def_cfa_offset 4
- 103              		@ sp needed
- 104 0028 5DF804FB 		ldr	pc, [sp], #4
- 105              	.L7:
- 106              		.align	2
- 107              	.L6:
- 108 002c 00440040 		.word	1073759232
- 109              		.cfi_endproc
- 110              	.LFE132:
- 112              		.section	.text.main,"ax",%progbits
- 113              		.align	1
- 114              		.global	main
- 115              		.syntax unified
- 116              		.thumb
- 117              		.thumb_func
- 118              		.fpu fpv4-sp-d16
- 120              	main:
- 121              	.LFB130:
-   6:Core/Src/main.c ****   
- 122              		.loc 1 6 16 is_stmt 1 view -0
- 123              		.cfi_startproc
- 124              		@ Volatile: function does not return.
- 125              		@ args = 0, pretend = 0, frame = 0
- 126              		@ frame_needed = 0, uses_anonymous_args = 0
- 127 0000 08B5     		push	{r3, lr}
- 128              	.LCFI3:
- 129              		.cfi_def_cfa_offset 8
- 130              		.cfi_offset 3, -8
- 131              		.cfi_offset 14, -4
-   8:Core/Src/main.c ****   SystemClock_Config();
- 132              		.loc 1 8 3 view .LVU26
- 133 0002 FFF7FEFF 		bl	HAL_Init
- 134              	.LVL1:
-   9:Core/Src/main.c ****   UART2_Init();
- 135              		.loc 1 9 3 view .LVU27
-ARM GAS  /tmp/cchFONwC.s 			page 4
+  80              		.cfi_offset 3, -8
+  81              		.cfi_offset 14, -4
+  26:Core/Src/main.c **** 	huart2.Init.BaudRate = 115200;
+  82              		.loc 1 26 2 view .LVU7
+  26:Core/Src/main.c **** 	huart2.Init.BaudRate = 115200;
+  83              		.loc 1 26 18 is_stmt 0 view .LVU8
+  84 0002 0948     		ldr	r0, .L8
+  85 0004 094B     		ldr	r3, .L8+4
+  86 0006 0360     		str	r3, [r0]
+  27:Core/Src/main.c **** 	huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  87              		.loc 1 27 2 is_stmt 1 view .LVU9
+  27:Core/Src/main.c **** 	huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  88              		.loc 1 27 23 is_stmt 0 view .LVU10
+  89 0008 4FF4E133 		mov	r3, #115200
+  90 000c 4360     		str	r3, [r0, #4]
+  28:Core/Src/main.c **** 	huart2.Init.StopBits = UART_STOPBITS_1;
+  91              		.loc 1 28 2 is_stmt 1 view .LVU11
+  28:Core/Src/main.c **** 	huart2.Init.StopBits = UART_STOPBITS_1;
+  92              		.loc 1 28 25 is_stmt 0 view .LVU12
+  93 000e 0023     		movs	r3, #0
+  94 0010 8360     		str	r3, [r0, #8]
+  29:Core/Src/main.c **** 	huart2.Init.Parity = UART_PARITY_NONE;
+  95              		.loc 1 29 2 is_stmt 1 view .LVU13
+  29:Core/Src/main.c **** 	huart2.Init.Parity = UART_PARITY_NONE;
+  96              		.loc 1 29 23 is_stmt 0 view .LVU14
+  97 0012 C360     		str	r3, [r0, #12]
+  30:Core/Src/main.c **** 	huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  98              		.loc 1 30 2 is_stmt 1 view .LVU15
+  30:Core/Src/main.c **** 	huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  99              		.loc 1 30 21 is_stmt 0 view .LVU16
+ 100 0014 0361     		str	r3, [r0, #16]
+  31:Core/Src/main.c **** 	huart2.Init.Mode = UART_MODE_TX_RX;
+ 101              		.loc 1 31 2 is_stmt 1 view .LVU17
+  31:Core/Src/main.c **** 	huart2.Init.Mode = UART_MODE_TX_RX;
+ 102              		.loc 1 31 24 is_stmt 0 view .LVU18
+ 103 0016 8361     		str	r3, [r0, #24]
+  32:Core/Src/main.c **** 	if ( HAL_UART_Init(&huart2) != HAL_OK ) {
+ 104              		.loc 1 32 2 is_stmt 1 view .LVU19
+  32:Core/Src/main.c **** 	if ( HAL_UART_Init(&huart2) != HAL_OK ) {
+ 105              		.loc 1 32 19 is_stmt 0 view .LVU20
+ 106 0018 0C23     		movs	r3, #12
+ 107 001a 4361     		str	r3, [r0, #20]
+  33:Core/Src/main.c **** 		Error_handler();
+ 108              		.loc 1 33 2 is_stmt 1 view .LVU21
+  33:Core/Src/main.c **** 		Error_handler();
+ 109              		.loc 1 33 7 is_stmt 0 view .LVU22
+ 110 001c FFF7FEFF 		bl	HAL_UART_Init
+ 111              	.LVL0:
+  33:Core/Src/main.c **** 		Error_handler();
+ 112              		.loc 1 33 5 view .LVU23
+ 113 0020 00B9     		cbnz	r0, .L7
+  36:Core/Src/main.c **** 
+ 114              		.loc 1 36 1 view .LVU24
+ 115 0022 08BD     		pop	{r3, pc}
+ 116              	.L7:
+  34:Core/Src/main.c **** 	}
+ 117              		.loc 1 34 3 is_stmt 1 view .LVU25
+ARM GAS  /tmp/ccmkwy84.s 			page 4
 
 
+ 118 0024 FFF7FEFF 		bl	Error_handler
+ 119              	.LVL1:
+ 120              	.L9:
+ 121              		.align	2
+ 122              	.L8:
+ 123 0028 00000000 		.word	.LANCHOR0
+ 124 002c 00440040 		.word	1073759232
+ 125              		.cfi_endproc
+ 126              	.LFE132:
+ 128              		.section	.text.main,"ax",%progbits
+ 129              		.align	1
+ 130              		.global	main
+ 131              		.syntax unified
+ 132              		.thumb
+ 133              		.thumb_func
+ 134              		.fpu fpv4-sp-d16
+ 136              	main:
+ 137              	.LFB130:
   10:Core/Src/main.c ****   
- 136              		.loc 1 10 3 view .LVU28
- 137 0006 FFF7FEFF 		bl	UART2_Init
- 138              	.LVL2:
- 139              	.L9:
-  12:Core/Src/main.c **** 
- 140              		.loc 1 12 3 discriminator 1 view .LVU29
-  15:Core/Src/main.c ****   
- 141              		.loc 1 15 3 discriminator 1 view .LVU30
-  12:Core/Src/main.c **** 
- 142              		.loc 1 12 9 discriminator 1 view .LVU31
- 143 000a FEE7     		b	.L9
- 144              		.cfi_endproc
- 145              	.LFE130:
- 147              		.text
- 148              	.Letext0:
- 149              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
- 150              		.file 3 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h"
- 151              		.file 4 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
- 152              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
- 153              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
- 154              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  /tmp/cchFONwC.s 			page 5
+ 138              		.loc 1 10 16 view -0
+ 139              		.cfi_startproc
+ 140              		@ Volatile: function does not return.
+ 141              		@ args = 0, pretend = 0, frame = 0
+ 142              		@ frame_needed = 0, uses_anonymous_args = 0
+ 143 0000 08B5     		push	{r3, lr}
+ 144              	.LCFI1:
+ 145              		.cfi_def_cfa_offset 8
+ 146              		.cfi_offset 3, -8
+ 147              		.cfi_offset 14, -4
+  12:Core/Src/main.c ****   SystemClock_Config();
+ 148              		.loc 1 12 3 view .LVU27
+ 149 0002 FFF7FEFF 		bl	HAL_Init
+ 150              	.LVL2:
+  13:Core/Src/main.c ****   UART2_Init();
+ 151              		.loc 1 13 3 view .LVU28
+  14:Core/Src/main.c ****   
+ 152              		.loc 1 14 3 view .LVU29
+ 153 0006 FFF7FEFF 		bl	UART2_Init
+ 154              	.LVL3:
+ 155              	.L11:
+  16:Core/Src/main.c ****   
+ 156              		.loc 1 16 3 discriminator 1 view .LVU30
+  16:Core/Src/main.c ****   
+ 157              		.loc 1 16 12 discriminator 1 view .LVU31
+  16:Core/Src/main.c ****   
+ 158              		.loc 1 16 9 discriminator 1 view .LVU32
+ 159 000a FEE7     		b	.L11
+ 160              		.cfi_endproc
+ 161              	.LFE130:
+ 163              		.global	huart2
+ 164              		.section	.bss.huart2,"aw",%nobits
+ 165              		.align	2
+ 166              		.set	.LANCHOR0,. + 0
+ 169              	huart2:
+ 170 0000 00000000 		.space	68
+ 170      00000000 
+ 170      00000000 
+ARM GAS  /tmp/ccmkwy84.s 			page 5
+
+
+ 170      00000000 
+ 170      00000000 
+ 171              		.text
+ 172              	.Letext0:
+ 173              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 174              		.file 3 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h"
+ 175              		.file 4 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 176              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 177              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 178              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  /tmp/ccmkwy84.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/cchFONwC.s:18     .text.SystemClock_Config:0000000000000000 $t
-     /tmp/cchFONwC.s:26     .text.SystemClock_Config:0000000000000000 SystemClock_Config
-     /tmp/cchFONwC.s:40     .text.UART2_Init:0000000000000000 $t
-     /tmp/cchFONwC.s:47     .text.UART2_Init:0000000000000000 UART2_Init
-     /tmp/cchFONwC.s:108    .text.UART2_Init:000000000000002c $d
-     /tmp/cchFONwC.s:113    .text.main:0000000000000000 $t
-     /tmp/cchFONwC.s:120    .text.main:0000000000000000 main
+     /tmp/ccmkwy84.s:18     .text.SystemClock_Config:0000000000000000 $t
+     /tmp/ccmkwy84.s:26     .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/ccmkwy84.s:40     .text.Error_handler:0000000000000000 $t
+     /tmp/ccmkwy84.s:47     .text.Error_handler:0000000000000000 Error_handler
+     /tmp/ccmkwy84.s:64     .text.UART2_Init:0000000000000000 $t
+     /tmp/ccmkwy84.s:71     .text.UART2_Init:0000000000000000 UART2_Init
+     /tmp/ccmkwy84.s:123    .text.UART2_Init:0000000000000028 $d
+     /tmp/ccmkwy84.s:129    .text.main:0000000000000000 $t
+     /tmp/ccmkwy84.s:136    .text.main:0000000000000000 main
+     /tmp/ccmkwy84.s:169    .bss.huart2:0000000000000000 huart2
+     /tmp/ccmkwy84.s:165    .bss.huart2:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 HAL_UART_Init
