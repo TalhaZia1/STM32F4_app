@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccZGPIvl.s 			page 1
+ARM GAS  /tmp/ccrr8j0v.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -17,11 +17,108 @@ ARM GAS  /tmp/ccZGPIvl.s 			page 1
   14              		.text
   15              	.Ltext0:
   16              		.cfi_sections	.debug_frame
-  17              	.Letext0:
-ARM GAS  /tmp/ccZGPIvl.s 			page 2
+  17              		.section	.text.HAL_MspInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	HAL_MspInit
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	HAL_MspInit:
+  27              	.LFB130:
+  28              		.file 1 "Core/Src/stm32f4xx_hal_msp.c"
+   1:Core/Src/stm32f4xx_hal_msp.c **** #include "stm32f4xx_hal.h"
+   2:Core/Src/stm32f4xx_hal_msp.c **** 
+   3:Core/Src/stm32f4xx_hal_msp.c **** /**
+   4:Core/Src/stm32f4xx_hal_msp.c ****  * TODO: Low level Processor Specific Inits 
+   5:Core/Src/stm32f4xx_hal_msp.c ****  * -> Priority Grouping of ARM Cortex MX Processor
+   6:Core/Src/stm32f4xx_hal_msp.c ****  * -> Enabling required system exceptions 
+   7:Core/Src/stm32f4xx_hal_msp.c ****  * -> Configuring priority for system exceptions 
+   8:Core/Src/stm32f4xx_hal_msp.c **** */
+   9:Core/Src/stm32f4xx_hal_msp.c **** 
+  10:Core/Src/stm32f4xx_hal_msp.c **** void HAL_MspInit(void) {
+  29              		.loc 1 10 24 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+  11:Core/Src/stm32f4xx_hal_msp.c ****     /**
+  12:Core/Src/stm32f4xx_hal_msp.c ****      * Priority Grouping -> Defualt for PriorityGroup-4
+  13:Core/Src/stm32f4xx_hal_msp.c ****     */
+  14:Core/Src/stm32f4xx_hal_msp.c ****     HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
+  38              		.loc 1 14 5 view .LVU1
+  39 0002 0320     		movs	r0, #3
+  40 0004 FFF7FEFF 		bl	HAL_NVIC_SetPriorityGrouping
+  41              	.LVL0:
+  15:Core/Src/stm32f4xx_hal_msp.c ****     
+  16:Core/Src/stm32f4xx_hal_msp.c ****     /**
+  17:Core/Src/stm32f4xx_hal_msp.c ****      * Enabling Usage Fault, Memoery Fault and Bus Fault System Exceptions
+ARM GAS  /tmp/ccrr8j0v.s 			page 2
+
+
+  18:Core/Src/stm32f4xx_hal_msp.c ****     */
+  19:Core/Src/stm32f4xx_hal_msp.c ****     SCB->SHCSR |= 0x7 << 16; 
+  42              		.loc 1 19 5 view .LVU2
+  43              		.loc 1 19 16 is_stmt 0 view .LVU3
+  44 0008 0B4A     		ldr	r2, .L3
+  45 000a 536A     		ldr	r3, [r2, #36]
+  46 000c 43F4E023 		orr	r3, r3, #458752
+  47 0010 5362     		str	r3, [r2, #36]
+  20:Core/Src/stm32f4xx_hal_msp.c **** 
+  21:Core/Src/stm32f4xx_hal_msp.c ****     /**
+  22:Core/Src/stm32f4xx_hal_msp.c ****      * Setting Priority of Systems Exceptions
+  23:Core/Src/stm32f4xx_hal_msp.c ****     */
+  24:Core/Src/stm32f4xx_hal_msp.c ****     HAL_NVIC_SetPriority(MemoryManagement_IRQn, 0, 0);
+  48              		.loc 1 24 5 is_stmt 1 view .LVU4
+  49 0012 0022     		movs	r2, #0
+  50 0014 1146     		mov	r1, r2
+  51 0016 6FF00B00 		mvn	r0, #11
+  52 001a FFF7FEFF 		bl	HAL_NVIC_SetPriority
+  53              	.LVL1:
+  25:Core/Src/stm32f4xx_hal_msp.c ****     HAL_NVIC_SetPriority(BusFault_IRQn, 0, 0);
+  54              		.loc 1 25 5 view .LVU5
+  55 001e 0022     		movs	r2, #0
+  56 0020 1146     		mov	r1, r2
+  57 0022 6FF00A00 		mvn	r0, #10
+  58 0026 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+  59              	.LVL2:
+  26:Core/Src/stm32f4xx_hal_msp.c ****     HAL_NVIC_SetPriority(UsageFault_IRQn, 0, 0);
+  60              		.loc 1 26 5 view .LVU6
+  61 002a 0022     		movs	r2, #0
+  62 002c 1146     		mov	r1, r2
+  63 002e 6FF00900 		mvn	r0, #9
+  64 0032 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+  65              	.LVL3:
+  27:Core/Src/stm32f4xx_hal_msp.c **** 
+  28:Core/Src/stm32f4xx_hal_msp.c **** }...
+  66              		.loc 1 28 1 is_stmt 0 view .LVU7
+  67 0036 08BD     		pop	{r3, pc}
+  68              	.L4:
+  69              		.align	2
+  70              	.L3:
+  71 0038 00ED00E0 		.word	-536810240
+  72              		.cfi_endproc
+  73              	.LFE130:
+  75              		.text
+  76              	.Letext0:
+  77              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+  78              		.file 3 "Drivers/CMSIS/Include/core_cm4.h"
+  79              		.file 4 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h"
+  80              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h"
+ARM GAS  /tmp/ccrr8j0v.s 			page 3
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f4xx_hal_msp.c
+     /tmp/ccrr8j0v.s:18     .text.HAL_MspInit:0000000000000000 $t
+     /tmp/ccrr8j0v.s:26     .text.HAL_MspInit:0000000000000000 HAL_MspInit
+     /tmp/ccrr8j0v.s:71     .text.HAL_MspInit:0000000000000038 $d
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+HAL_NVIC_SetPriorityGrouping
+HAL_NVIC_SetPriority
