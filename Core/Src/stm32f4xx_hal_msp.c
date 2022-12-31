@@ -8,21 +8,20 @@
 */
 
 void HAL_MspInit(void) {
-    /**
-     * Priority Grouping -> Defualt for PriorityGroup-4
-    */
     HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
-    
-    /**
-     * Enabling Usage Fault, Memoery Fault and Bus Fault System Exceptions
-    */
     SCB->SHCSR |= 0x7 << 16; 
-
-    /**
-     * Setting Priority of Systems Exceptions
-    */
     HAL_NVIC_SetPriority(MemoryManagement_IRQn, 0, 0);
     HAL_NVIC_SetPriority(BusFault_IRQn, 0, 0);
     HAL_NVIC_SetPriority(UsageFault_IRQn, 0, 0);
+}
 
+/**
+ * TODO: Low Level Init -> USART2 Peripheral
+ * -> Clock Enable
+ * -> Pin Muxing
+ * -> Enabling IRQ and setup Priority (NVIC Setting)
+*/
+
+void HAL_UART_MspInit(UART_HandleTypeDef *huart) {
+    __HAL_RCC_USART2_CLK_ENABLE();
 }

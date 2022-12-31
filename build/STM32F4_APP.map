@@ -61,6 +61,8 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/stm32f4xx_hal_msp.o
  .data          0x0000000000000000        0x0 build/stm32f4xx_hal_msp.o
  .bss           0x0000000000000000        0x0 build/stm32f4xx_hal_msp.o
+ .text.HAL_UART_MspInit
+                0x0000000000000000       0x24 build/stm32f4xx_hal_msp.o
  .text          0x0000000000000000        0x0 build/stm32f4xx_hal_tim.o
  .data          0x0000000000000000        0x0 build/stm32f4xx_hal_tim.o
  .bss           0x0000000000000000        0x0 build/stm32f4xx_hal_tim.o
@@ -1122,88 +1124,88 @@ LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/libgcc.a
  .comment       0x0000000000000033       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
  .comment       0x0000000000000033       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtend.o
 
-.debug_info     0x0000000000000000     0x2fb2
+.debug_info     0x0000000000000000     0x378f
  .debug_info    0x0000000000000000      0x6a4 build/main.o
- .debug_info    0x00000000000006a4      0x560 build/stm32f4xx_hal_msp.o
- .debug_info    0x0000000000000c04     0x116e build/stm32f4xx_hal_cortex.o
- .debug_info    0x0000000000001d72      0xb25 build/stm32f4xx_hal.o
- .debug_info    0x0000000000002897      0x5df build/system_stm32f4xx.o
- .debug_info    0x0000000000002e76       0x22 build/startup_stm32f446xx.o
- .debug_info    0x0000000000002e98      0x11a /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
+ .debug_info    0x00000000000006a4      0xd3d build/stm32f4xx_hal_msp.o
+ .debug_info    0x00000000000013e1     0x116e build/stm32f4xx_hal_cortex.o
+ .debug_info    0x000000000000254f      0xb25 build/stm32f4xx_hal.o
+ .debug_info    0x0000000000003074      0x5df build/system_stm32f4xx.o
+ .debug_info    0x0000000000003653       0x22 build/startup_stm32f446xx.o
+ .debug_info    0x0000000000003675      0x11a /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
 
-.debug_abbrev   0x0000000000000000      0xa3d
+.debug_abbrev   0x0000000000000000      0xab9
  .debug_abbrev  0x0000000000000000      0x1a5 build/main.o
- .debug_abbrev  0x00000000000001a5      0x114 build/stm32f4xx_hal_msp.o
- .debug_abbrev  0x00000000000002b9      0x382 build/stm32f4xx_hal_cortex.o
- .debug_abbrev  0x000000000000063b      0x209 build/stm32f4xx_hal.o
- .debug_abbrev  0x0000000000000844      0x11b build/system_stm32f4xx.o
- .debug_abbrev  0x000000000000095f       0x12 build/startup_stm32f446xx.o
- .debug_abbrev  0x0000000000000971       0xcc /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
+ .debug_abbrev  0x00000000000001a5      0x190 build/stm32f4xx_hal_msp.o
+ .debug_abbrev  0x0000000000000335      0x382 build/stm32f4xx_hal_cortex.o
+ .debug_abbrev  0x00000000000006b7      0x209 build/stm32f4xx_hal.o
+ .debug_abbrev  0x00000000000008c0      0x11b build/system_stm32f4xx.o
+ .debug_abbrev  0x00000000000009db       0x12 build/startup_stm32f446xx.o
+ .debug_abbrev  0x00000000000009ed       0xcc /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
 
-.debug_loc      0x0000000000000000      0xc10
+.debug_loc      0x0000000000000000      0xc3c
  .debug_loc     0x0000000000000000       0x59 build/main.o
- .debug_loc     0x0000000000000059       0x20 build/stm32f4xx_hal_msp.o
- .debug_loc     0x0000000000000079      0x7a4 build/stm32f4xx_hal_cortex.o
- .debug_loc     0x000000000000081d      0x1e1 build/stm32f4xx_hal.o
- .debug_loc     0x00000000000009fe      0x158 build/system_stm32f4xx.o
- .debug_loc     0x0000000000000b56       0xba /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
+ .debug_loc     0x0000000000000059       0x4c build/stm32f4xx_hal_msp.o
+ .debug_loc     0x00000000000000a5      0x7a4 build/stm32f4xx_hal_cortex.o
+ .debug_loc     0x0000000000000849      0x1e1 build/stm32f4xx_hal.o
+ .debug_loc     0x0000000000000a2a      0x158 build/system_stm32f4xx.o
+ .debug_loc     0x0000000000000b82       0xba /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
 
-.debug_aranges  0x0000000000000000      0x258
+.debug_aranges  0x0000000000000000      0x260
  .debug_aranges
                 0x0000000000000000       0x30 build/main.o
  .debug_aranges
-                0x0000000000000030       0x20 build/stm32f4xx_hal_msp.o
+                0x0000000000000030       0x28 build/stm32f4xx_hal_msp.o
  .debug_aranges
-                0x0000000000000050       0xa8 build/stm32f4xx_hal_cortex.o
+                0x0000000000000058       0xa8 build/stm32f4xx_hal_cortex.o
  .debug_aranges
-                0x00000000000000f8       0xf0 build/stm32f4xx_hal.o
+                0x0000000000000100       0xf0 build/stm32f4xx_hal.o
  .debug_aranges
-                0x00000000000001e8       0x28 build/system_stm32f4xx.o
+                0x00000000000001f0       0x28 build/system_stm32f4xx.o
  .debug_aranges
-                0x0000000000000210       0x28 build/startup_stm32f446xx.o
+                0x0000000000000218       0x28 build/startup_stm32f446xx.o
  .debug_aranges
-                0x0000000000000238       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
+                0x0000000000000240       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
 
-.debug_ranges   0x0000000000000000      0x240
+.debug_ranges   0x0000000000000000      0x248
  .debug_ranges  0x0000000000000000       0x20 build/main.o
- .debug_ranges  0x0000000000000020       0x10 build/stm32f4xx_hal_msp.o
- .debug_ranges  0x0000000000000030       0xf8 build/stm32f4xx_hal_cortex.o
- .debug_ranges  0x0000000000000128       0xe0 build/stm32f4xx_hal.o
- .debug_ranges  0x0000000000000208       0x18 build/system_stm32f4xx.o
- .debug_ranges  0x0000000000000220       0x20 build/startup_stm32f446xx.o
+ .debug_ranges  0x0000000000000020       0x18 build/stm32f4xx_hal_msp.o
+ .debug_ranges  0x0000000000000038       0xf8 build/stm32f4xx_hal_cortex.o
+ .debug_ranges  0x0000000000000130       0xe0 build/stm32f4xx_hal.o
+ .debug_ranges  0x0000000000000210       0x18 build/system_stm32f4xx.o
+ .debug_ranges  0x0000000000000228       0x20 build/startup_stm32f446xx.o
 
-.debug_line     0x0000000000000000     0x1230
+.debug_line     0x0000000000000000     0x1296
  .debug_line    0x0000000000000000      0x1c0 build/main.o
- .debug_line    0x00000000000001c0      0x130 build/stm32f4xx_hal_msp.o
- .debug_line    0x00000000000002f0      0x6ef build/stm32f4xx_hal_cortex.o
- .debug_line    0x00000000000009df      0x4dc build/stm32f4xx_hal.o
- .debug_line    0x0000000000000ebb      0x1c7 build/system_stm32f4xx.o
- .debug_line    0x0000000000001082       0x76 build/startup_stm32f446xx.o
- .debug_line    0x00000000000010f8      0x138 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
+ .debug_line    0x00000000000001c0      0x196 build/stm32f4xx_hal_msp.o
+ .debug_line    0x0000000000000356      0x6ef build/stm32f4xx_hal_cortex.o
+ .debug_line    0x0000000000000a45      0x4dc build/stm32f4xx_hal.o
+ .debug_line    0x0000000000000f21      0x1c7 build/system_stm32f4xx.o
+ .debug_line    0x00000000000010e8       0x76 build/startup_stm32f446xx.o
+ .debug_line    0x000000000000115e      0x138 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
 
-.debug_str      0x0000000000000000     0x1646
+.debug_str      0x0000000000000000     0x1664
  .debug_str     0x0000000000000000      0x59b build/main.o
                                         0x60d (size before relaxing)
- .debug_str     0x000000000000059b      0x5ce build/stm32f4xx_hal_msp.o
-                                        0x754 (size before relaxing)
- .debug_str     0x0000000000000b69      0x4b3 build/stm32f4xx_hal_cortex.o
+ .debug_str     0x000000000000059b      0x6fe build/stm32f4xx_hal_msp.o
+                                        0xcb3 (size before relaxing)
+ .debug_str     0x0000000000000c99      0x48b build/stm32f4xx_hal_cortex.o
                                         0xc2e (size before relaxing)
- .debug_str     0x000000000000101c      0x41e build/stm32f4xx_hal.o
+ .debug_str     0x0000000000001124      0x334 build/stm32f4xx_hal.o
                                         0xb95 (size before relaxing)
- .debug_str     0x000000000000143a       0x74 build/system_stm32f4xx.o
+ .debug_str     0x0000000000001458       0x74 build/system_stm32f4xx.o
                                         0x365 (size before relaxing)
- .debug_str     0x00000000000014ae       0x22 build/startup_stm32f446xx.o
+ .debug_str     0x00000000000014cc       0x22 build/startup_stm32f446xx.o
                                          0x48 (size before relaxing)
- .debug_str     0x00000000000014d0      0x176 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
+ .debug_str     0x00000000000014ee      0x176 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
                                         0x20b (size before relaxing)
 
-.debug_frame    0x0000000000000000      0x40c
+.debug_frame    0x0000000000000000      0x424
  .debug_frame   0x0000000000000000       0x54 build/main.o
- .debug_frame   0x0000000000000054       0x28 build/stm32f4xx_hal_msp.o
- .debug_frame   0x000000000000007c      0x148 build/stm32f4xx_hal_cortex.o
- .debug_frame   0x00000000000001c4      0x1ec build/stm32f4xx_hal.o
- .debug_frame   0x00000000000003b0       0x30 build/system_stm32f4xx.o
- .debug_frame   0x00000000000003e0       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
+ .debug_frame   0x0000000000000054       0x40 build/stm32f4xx_hal_msp.o
+ .debug_frame   0x0000000000000094      0x148 build/stm32f4xx_hal_cortex.o
+ .debug_frame   0x00000000000001dc      0x1ec build/stm32f4xx_hal.o
+ .debug_frame   0x00000000000003c8       0x30 build/system_stm32f4xx.o
+ .debug_frame   0x00000000000003f8       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
 
 Cross Reference Table
 
@@ -1427,6 +1429,7 @@ HAL_SYSTICK_IRQHandler                            build/stm32f4xx_hal_cortex.o
 HAL_SetTickFreq                                   build/stm32f4xx_hal.o
 HAL_SuspendTick                                   build/stm32f4xx_hal.o
 HAL_UART_Init                                     build/main.o
+HAL_UART_MspInit                                  build/stm32f4xx_hal_msp.o
 HardFault_Handler                                 build/startup_stm32f446xx.o
 I2C1_ER_IRQHandler                                build/startup_stm32f446xx.o
 I2C1_EV_IRQHandler                                build/startup_stm32f446xx.o
