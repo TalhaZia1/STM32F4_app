@@ -1,26 +1,3 @@
-/* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file    stm32f4xx_hal_conf_template.h
-  * @author  MCD Application Team
-  * @brief   HAL configuration template file.
-  *          This file should be copied to the application folder and renamed
-  *          to stm32f4xx_hal_conf.h.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
-/* USER CODE END Header */
-
-/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F4xx_HAL_CONF_H
 #define __STM32F4xx_HAL_CONF_H
 
@@ -37,7 +14,7 @@
   */
 #define HAL_MODULE_ENABLED
 
-  /* #define HAL_CRYP_MODULE_ENABLED */
+/* #define HAL_CRYP_MODULE_ENABLED */
 /* #define HAL_ADC_MODULE_ENABLED */
 /* #define HAL_CAN_MODULE_ENABLED */
 /* #define HAL_CRC_MODULE_ENABLED */
@@ -63,7 +40,7 @@
 /* #define HAL_MMC_MODULE_ENABLED */
 /* #define HAL_SPI_MODULE_ENABLED */
 /* #define HAL_TIM_MODULE_ENABLED */
-/* #define HAL_UART_MODULE_ENABLED */
+#define HAL_UART_MODULE_ENABLED 
 /* #define HAL_USART_MODULE_ENABLED */
 /* #define HAL_IRDA_MODULE_ENABLED */
 /* #define HAL_SMARTCARD_MODULE_ENABLED */
