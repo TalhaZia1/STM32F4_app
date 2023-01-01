@@ -7,6 +7,8 @@
         "stm32f4xx_hal_def.h": "c",
         "stm32f446xx.h": "c",
         "stm32f4xx_hal_uart.h": "c",
-        "stm32f4xx_hal_conf.h": "c"
+        "stm32f4xx_hal_conf.h": "c",
+        "stm32f4xx_it.h": "c",
+        "stdbool.h": "c"
     }
 }

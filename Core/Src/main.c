@@ -7,12 +7,21 @@ void UART2_Polling(void);
 
 UART_HandleTypeDef huart2;
 
+uint8_t data_buffer[100];
+uint8_t command;
+bool isRxComplete = false; 
+uint32_t count = 0U;
+
 
 int main(void) {
 	HAL_Init();
 	SystemClock_Config();
 	UART2_Init();
-	UART2_Polling();
+	
+	while (!isRxComplete) {
+		(void)HAL_UART_Receive_IT(&huart2, &command, 1);
+	}
+
 	while (1);
 	return 0; 
 }
@@ -38,22 +47,30 @@ void Error_handler(void) {
 	while(1);
 }
 
-void UART2_Polling(void) {
-	uint8_t command;
-	uint8_t rx_buffer[100];
-	uint32_t count = 0U;
-
-	while(1) {
-		(void)HAL_UART_Receive(&huart2, &command, 1, HAL_MAX_DELAY);
-		if (command == '\r') {
-			break;
-		} else {
-			rx_buffer[count] = command;
-			count++;
-		}
-	} 
-
-	(void)HAL_UART_Transmit(&huart2, (uint8_t *)rx_buffer, count, HAL_MAX_DELAY);
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+	if (command =='\r') {
+		isRxComplete = true; 
+		(void)HAL_UART_Transmit(&huart2, (uint8_t *)data_buffer, count, HAL_MAX_DELAY);
+	} else {
+		data_buffer[count++] = command;
+	}
 
 }
+
+//void UART2_Polling(void) {
+//	uint8_t command;
+//	uint8_t rx_buffer[100];
+//	uint32_t count = 0U;
+//
+//	while(1) {
+//		(void)HAL_UART_Receive(&huart2, &command, 1, HAL_MAX_DELAY);
+//		if (command == '\r') {
+//			break;
+//		} else {
+//			rx_buffer[count] = command;
+//			count++;
+//		}
+//	} 
+//	(void)HAL_UART_Transmit(&huart2, (uint8_t *)rx_buffer, count, HAL_MAX_DELAY);
+//}
 
