@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cck5Gsic.s 			page 1
+ARM GAS  /tmp/ccqSJhMy.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -29,38 +29,42 @@ ARM GAS  /tmp/cck5Gsic.s 			page 1
   27              	.LFB131:
   28              		.file 1 "Core/Src/main.c"
    1:Core/Src/main.c **** #include "main.h"
-   2:Core/Src/main.c **** #include "stm32f4xx_hal.h"
-   3:Core/Src/main.c **** 
-   4:Core/Src/main.c **** void SystemClock_Config(void);
-   5:Core/Src/main.c **** void UART2_Init(void); 
-   6:Core/Src/main.c **** void Error_handler(void);
-   7:Core/Src/main.c **** 
-   8:Core/Src/main.c **** UART_HandleTypeDef huart2;
-   9:Core/Src/main.c **** 
-  10:Core/Src/main.c **** int main(void) {
-  11:Core/Src/main.c ****   
-  12:Core/Src/main.c ****   HAL_Init();
-  13:Core/Src/main.c ****   SystemClock_Config();
-  14:Core/Src/main.c ****   UART2_Init();
-  15:Core/Src/main.c ****   
-  16:Core/Src/main.c ****   while (1);
-  17:Core/Src/main.c ****   
-  18:Core/Src/main.c ****   return 0; 
-  19:Core/Src/main.c **** }
-  20:Core/Src/main.c **** 
-  21:Core/Src/main.c **** void SystemClock_Config(void) {
-  29              		.loc 1 21 31 view -0
+   2:Core/Src/main.c **** 
+   3:Core/Src/main.c **** void SystemClock_Config(void);
+   4:Core/Src/main.c **** void UART2_Init(void); 
+   5:Core/Src/main.c **** void Error_handler(void);
+   6:Core/Src/main.c **** 
+   7:Core/Src/main.c **** UART_HandleTypeDef huart2;
+   8:Core/Src/main.c **** 
+   9:Core/Src/main.c **** char *data = "The application is running\r\n";
+  10:Core/Src/main.c **** 
+  11:Core/Src/main.c **** int main(void) {
+  12:Core/Src/main.c **** 	HAL_Init();
+  13:Core/Src/main.c **** 	SystemClock_Config();
+  14:Core/Src/main.c **** 	UART2_Init();
+  15:Core/Src/main.c **** 	uint16_t length = strlen(data);
+  16:Core/Src/main.c **** 	if (HAL_UART_Transmit(&huart2, (uint8_t*) data, length, HAL_MAX_DELAY) != HAL_OK) {
+  17:Core/Src/main.c **** 		Error_handler();
+  18:Core/Src/main.c **** 	}
+  19:Core/Src/main.c **** 	while (1) {
+  20:Core/Src/main.c **** 		(void)HAL_UART_Transmit(&huart2, (uint8_t*) data, length, HAL_MAX_DELAY);
+  21:Core/Src/main.c **** 	}
+  22:Core/Src/main.c **** 	return 0; 
+  23:Core/Src/main.c **** }
+  24:Core/Src/main.c **** 
+  25:Core/Src/main.c **** void SystemClock_Config(void) {
+  29              		.loc 1 25 31 view -0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
   33              		@ link register save eliminated.
-  22:Core/Src/main.c **** 
-  23:Core/Src/main.c **** }
-  34              		.loc 1 23 1 view .LVU1
+ARM GAS  /tmp/ccqSJhMy.s 			page 2
+
+
+  26:Core/Src/main.c **** 
+  27:Core/Src/main.c **** }
+  34              		.loc 1 27 1 view .LVU1
   35 0000 7047     		bx	lr
-ARM GAS  /tmp/cck5Gsic.s 			page 2
-
-
   36              		.cfi_endproc
   37              	.LFE131:
   39              		.section	.text.Error_handler,"ax",%progbits
@@ -72,32 +76,32 @@ ARM GAS  /tmp/cck5Gsic.s 			page 1
   45              		.fpu fpv4-sp-d16
   47              	Error_handler:
   48              	.LFB133:
-  24:Core/Src/main.c **** 
-  25:Core/Src/main.c **** void UART2_Init(void) {
-  26:Core/Src/main.c **** 	huart2.Instance = USART2;
-  27:Core/Src/main.c **** 	huart2.Init.BaudRate = 115200;
-  28:Core/Src/main.c **** 	huart2.Init.WordLength = UART_WORDLENGTH_8B;
-  29:Core/Src/main.c **** 	huart2.Init.StopBits = UART_STOPBITS_1;
-  30:Core/Src/main.c **** 	huart2.Init.Parity = UART_PARITY_NONE;
-  31:Core/Src/main.c **** 	huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  32:Core/Src/main.c **** 	huart2.Init.Mode = UART_MODE_TX_RX;
-  33:Core/Src/main.c **** 	if ( HAL_UART_Init(&huart2) != HAL_OK ) {
-  34:Core/Src/main.c **** 		Error_handler();
-  35:Core/Src/main.c **** 	}
-  36:Core/Src/main.c **** }
-  37:Core/Src/main.c **** 
-  38:Core/Src/main.c **** void Error_handler(void) {
-  49              		.loc 1 38 26 view -0
+  28:Core/Src/main.c **** 
+  29:Core/Src/main.c **** void UART2_Init(void) {
+  30:Core/Src/main.c **** 	huart2.Instance = USART2;
+  31:Core/Src/main.c **** 	huart2.Init.BaudRate = 115200;
+  32:Core/Src/main.c **** 	huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  33:Core/Src/main.c **** 	huart2.Init.StopBits = UART_STOPBITS_1;
+  34:Core/Src/main.c **** 	huart2.Init.Parity = UART_PARITY_NONE;
+  35:Core/Src/main.c **** 	huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  36:Core/Src/main.c **** 	huart2.Init.Mode = UART_MODE_TX_RX;
+  37:Core/Src/main.c **** 	if ( HAL_UART_Init(&huart2) != HAL_OK ) {
+  38:Core/Src/main.c **** 		Error_handler();
+  39:Core/Src/main.c **** 	}
+  40:Core/Src/main.c **** }
+  41:Core/Src/main.c **** 
+  42:Core/Src/main.c **** void Error_handler(void) {
+  49              		.loc 1 42 26 view -0
   50              		.cfi_startproc
   51              		@ Volatile: function does not return.
   52              		@ args = 0, pretend = 0, frame = 0
   53              		@ frame_needed = 0, uses_anonymous_args = 0
   54              		@ link register save eliminated.
   55              	.L3:
-  39:Core/Src/main.c ****   while(1);
-  56              		.loc 1 39 3 discriminator 1 view .LVU3
-  57              		.loc 1 39 11 discriminator 1 view .LVU4
-  58              		.loc 1 39 8 discriminator 1 view .LVU5
+  43:Core/Src/main.c **** 	while(1);
+  56              		.loc 1 43 2 discriminator 1 view .LVU3
+  57              		.loc 1 43 10 discriminator 1 view .LVU4
+  58              		.loc 1 43 7 discriminator 1 view .LVU5
   59 0000 FEE7     		b	.L3
   60              		.cfi_endproc
   61              	.LFE133:
@@ -110,77 +114,77 @@ ARM GAS  /tmp/cck5Gsic.s 			page 1
   69              		.fpu fpv4-sp-d16
   71              	UART2_Init:
   72              	.LFB132:
-  25:Core/Src/main.c **** 	huart2.Instance = USART2;
-  73              		.loc 1 25 23 view -0
+  29:Core/Src/main.c **** 	huart2.Instance = USART2;
+  73              		.loc 1 29 23 view -0
   74              		.cfi_startproc
   75              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /tmp/ccqSJhMy.s 			page 3
+
+
   76              		@ frame_needed = 0, uses_anonymous_args = 0
   77 0000 08B5     		push	{r3, lr}
   78              	.LCFI0:
   79              		.cfi_def_cfa_offset 8
-ARM GAS  /tmp/cck5Gsic.s 			page 3
-
-
   80              		.cfi_offset 3, -8
   81              		.cfi_offset 14, -4
-  26:Core/Src/main.c **** 	huart2.Init.BaudRate = 115200;
-  82              		.loc 1 26 2 view .LVU7
-  26:Core/Src/main.c **** 	huart2.Init.BaudRate = 115200;
-  83              		.loc 1 26 18 is_stmt 0 view .LVU8
+  30:Core/Src/main.c **** 	huart2.Init.BaudRate = 115200;
+  82              		.loc 1 30 2 view .LVU7
+  30:Core/Src/main.c **** 	huart2.Init.BaudRate = 115200;
+  83              		.loc 1 30 18 is_stmt 0 view .LVU8
   84 0002 0948     		ldr	r0, .L8
   85 0004 094B     		ldr	r3, .L8+4
   86 0006 0360     		str	r3, [r0]
-  27:Core/Src/main.c **** 	huart2.Init.WordLength = UART_WORDLENGTH_8B;
-  87              		.loc 1 27 2 is_stmt 1 view .LVU9
-  27:Core/Src/main.c **** 	huart2.Init.WordLength = UART_WORDLENGTH_8B;
-  88              		.loc 1 27 23 is_stmt 0 view .LVU10
+  31:Core/Src/main.c **** 	huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  87              		.loc 1 31 2 is_stmt 1 view .LVU9
+  31:Core/Src/main.c **** 	huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  88              		.loc 1 31 23 is_stmt 0 view .LVU10
   89 0008 4FF4E133 		mov	r3, #115200
   90 000c 4360     		str	r3, [r0, #4]
-  28:Core/Src/main.c **** 	huart2.Init.StopBits = UART_STOPBITS_1;
-  91              		.loc 1 28 2 is_stmt 1 view .LVU11
-  28:Core/Src/main.c **** 	huart2.Init.StopBits = UART_STOPBITS_1;
-  92              		.loc 1 28 25 is_stmt 0 view .LVU12
+  32:Core/Src/main.c **** 	huart2.Init.StopBits = UART_STOPBITS_1;
+  91              		.loc 1 32 2 is_stmt 1 view .LVU11
+  32:Core/Src/main.c **** 	huart2.Init.StopBits = UART_STOPBITS_1;
+  92              		.loc 1 32 25 is_stmt 0 view .LVU12
   93 000e 0023     		movs	r3, #0
   94 0010 8360     		str	r3, [r0, #8]
-  29:Core/Src/main.c **** 	huart2.Init.Parity = UART_PARITY_NONE;
-  95              		.loc 1 29 2 is_stmt 1 view .LVU13
-  29:Core/Src/main.c **** 	huart2.Init.Parity = UART_PARITY_NONE;
-  96              		.loc 1 29 23 is_stmt 0 view .LVU14
+  33:Core/Src/main.c **** 	huart2.Init.Parity = UART_PARITY_NONE;
+  95              		.loc 1 33 2 is_stmt 1 view .LVU13
+  33:Core/Src/main.c **** 	huart2.Init.Parity = UART_PARITY_NONE;
+  96              		.loc 1 33 23 is_stmt 0 view .LVU14
   97 0012 C360     		str	r3, [r0, #12]
-  30:Core/Src/main.c **** 	huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  98              		.loc 1 30 2 is_stmt 1 view .LVU15
-  30:Core/Src/main.c **** 	huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  99              		.loc 1 30 21 is_stmt 0 view .LVU16
+  34:Core/Src/main.c **** 	huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  98              		.loc 1 34 2 is_stmt 1 view .LVU15
+  34:Core/Src/main.c **** 	huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  99              		.loc 1 34 21 is_stmt 0 view .LVU16
  100 0014 0361     		str	r3, [r0, #16]
-  31:Core/Src/main.c **** 	huart2.Init.Mode = UART_MODE_TX_RX;
- 101              		.loc 1 31 2 is_stmt 1 view .LVU17
-  31:Core/Src/main.c **** 	huart2.Init.Mode = UART_MODE_TX_RX;
- 102              		.loc 1 31 24 is_stmt 0 view .LVU18
+  35:Core/Src/main.c **** 	huart2.Init.Mode = UART_MODE_TX_RX;
+ 101              		.loc 1 35 2 is_stmt 1 view .LVU17
+  35:Core/Src/main.c **** 	huart2.Init.Mode = UART_MODE_TX_RX;
+ 102              		.loc 1 35 24 is_stmt 0 view .LVU18
  103 0016 8361     		str	r3, [r0, #24]
-  32:Core/Src/main.c **** 	if ( HAL_UART_Init(&huart2) != HAL_OK ) {
- 104              		.loc 1 32 2 is_stmt 1 view .LVU19
-  32:Core/Src/main.c **** 	if ( HAL_UART_Init(&huart2) != HAL_OK ) {
- 105              		.loc 1 32 19 is_stmt 0 view .LVU20
+  36:Core/Src/main.c **** 	if ( HAL_UART_Init(&huart2) != HAL_OK ) {
+ 104              		.loc 1 36 2 is_stmt 1 view .LVU19
+  36:Core/Src/main.c **** 	if ( HAL_UART_Init(&huart2) != HAL_OK ) {
+ 105              		.loc 1 36 19 is_stmt 0 view .LVU20
  106 0018 0C23     		movs	r3, #12
  107 001a 4361     		str	r3, [r0, #20]
-  33:Core/Src/main.c **** 		Error_handler();
- 108              		.loc 1 33 2 is_stmt 1 view .LVU21
-  33:Core/Src/main.c **** 		Error_handler();
- 109              		.loc 1 33 7 is_stmt 0 view .LVU22
+  37:Core/Src/main.c **** 		Error_handler();
+ 108              		.loc 1 37 2 is_stmt 1 view .LVU21
+  37:Core/Src/main.c **** 		Error_handler();
+ 109              		.loc 1 37 7 is_stmt 0 view .LVU22
  110 001c FFF7FEFF 		bl	HAL_UART_Init
  111              	.LVL0:
-  33:Core/Src/main.c **** 		Error_handler();
- 112              		.loc 1 33 5 view .LVU23
+  37:Core/Src/main.c **** 		Error_handler();
+ 112              		.loc 1 37 5 view .LVU23
  113 0020 00B9     		cbnz	r0, .L7
-  36:Core/Src/main.c **** 
- 114              		.loc 1 36 1 view .LVU24
+  40:Core/Src/main.c **** 
+ 114              		.loc 1 40 1 view .LVU24
+ARM GAS  /tmp/ccqSJhMy.s 			page 4
+
+
  115 0022 08BD     		pop	{r3, pc}
  116              	.L7:
-  34:Core/Src/main.c **** 	}
- 117              		.loc 1 34 3 is_stmt 1 view .LVU25
-ARM GAS  /tmp/cck5Gsic.s 			page 4
-
-
+  38:Core/Src/main.c **** 	}
+ 117              		.loc 1 38 3 is_stmt 1 view .LVU25
  118 0024 FFF7FEFF 		bl	Error_handler
  119              	.LVL1:
  120              	.L9:
@@ -199,75 +203,145 @@ ARM GAS  /tmp/cck5Gsic.s 			page 1
  134              		.fpu fpv4-sp-d16
  136              	main:
  137              	.LFB130:
-  10:Core/Src/main.c ****   
- 138              		.loc 1 10 16 view -0
+  11:Core/Src/main.c **** 	HAL_Init();
+ 138              		.loc 1 11 16 view -0
  139              		.cfi_startproc
- 140              		@ Volatile: function does not return.
- 141              		@ args = 0, pretend = 0, frame = 0
- 142              		@ frame_needed = 0, uses_anonymous_args = 0
- 143 0000 08B5     		push	{r3, lr}
- 144              	.LCFI1:
- 145              		.cfi_def_cfa_offset 8
- 146              		.cfi_offset 3, -8
- 147              		.cfi_offset 14, -4
-  12:Core/Src/main.c ****   SystemClock_Config();
- 148              		.loc 1 12 3 view .LVU27
- 149 0002 FFF7FEFF 		bl	HAL_Init
- 150              	.LVL2:
-  13:Core/Src/main.c ****   UART2_Init();
- 151              		.loc 1 13 3 view .LVU28
-  14:Core/Src/main.c ****   
- 152              		.loc 1 14 3 view .LVU29
- 153 0006 FFF7FEFF 		bl	UART2_Init
- 154              	.LVL3:
- 155              	.L11:
-  16:Core/Src/main.c ****   
- 156              		.loc 1 16 3 discriminator 1 view .LVU30
-  16:Core/Src/main.c ****   
- 157              		.loc 1 16 12 discriminator 1 view .LVU31
-  16:Core/Src/main.c ****   
- 158              		.loc 1 16 9 discriminator 1 view .LVU32
- 159 000a FEE7     		b	.L11
- 160              		.cfi_endproc
- 161              	.LFE130:
- 163              		.global	huart2
- 164              		.section	.bss.huart2,"aw",%nobits
- 165              		.align	2
- 166              		.set	.LANCHOR0,. + 0
- 169              	huart2:
- 170 0000 00000000 		.space	68
- 170      00000000 
- 170      00000000 
-ARM GAS  /tmp/cck5Gsic.s 			page 5
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142 0000 38B5     		push	{r3, r4, r5, lr}
+ 143              	.LCFI1:
+ 144              		.cfi_def_cfa_offset 16
+ 145              		.cfi_offset 3, -16
+ 146              		.cfi_offset 4, -12
+ 147              		.cfi_offset 5, -8
+ 148              		.cfi_offset 14, -4
+  12:Core/Src/main.c **** 	SystemClock_Config();
+ 149              		.loc 1 12 2 view .LVU27
+ 150 0002 FFF7FEFF 		bl	HAL_Init
+ 151              	.LVL2:
+  13:Core/Src/main.c **** 	UART2_Init();
+ 152              		.loc 1 13 2 view .LVU28
+  14:Core/Src/main.c **** 	uint16_t length = strlen(data);
+ 153              		.loc 1 14 2 view .LVU29
+ 154 0006 FFF7FEFF 		bl	UART2_Init
+ 155              	.LVL3:
+  15:Core/Src/main.c **** 	if (HAL_UART_Transmit(&huart2, (uint8_t*) data, length, HAL_MAX_DELAY) != HAL_OK) {
+ 156              		.loc 1 15 2 view .LVU30
+  15:Core/Src/main.c **** 	if (HAL_UART_Transmit(&huart2, (uint8_t*) data, length, HAL_MAX_DELAY) != HAL_OK) {
+ 157              		.loc 1 15 20 is_stmt 0 view .LVU31
+ 158 000a 0C4B     		ldr	r3, .L14
+ 159 000c 1D68     		ldr	r5, [r3]
+ 160 000e 2846     		mov	r0, r5
+ 161 0010 FFF7FEFF 		bl	strlen
+ 162              	.LVL4:
+  15:Core/Src/main.c **** 	if (HAL_UART_Transmit(&huart2, (uint8_t*) data, length, HAL_MAX_DELAY) != HAL_OK) {
+ 163              		.loc 1 15 11 view .LVU32
+ 164 0014 84B2     		uxth	r4, r0
+ 165              	.LVL5:
+ARM GAS  /tmp/ccqSJhMy.s 			page 5
 
 
- 170      00000000 
- 170      00000000 
- 171              		.text
- 172              	.Letext0:
- 173              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
- 174              		.file 3 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h"
- 175              		.file 4 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
- 176              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
- 177              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
- 178              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  /tmp/cck5Gsic.s 			page 6
+  16:Core/Src/main.c **** 		Error_handler();
+ 166              		.loc 1 16 2 is_stmt 1 view .LVU33
+  16:Core/Src/main.c **** 		Error_handler();
+ 167              		.loc 1 16 6 is_stmt 0 view .LVU34
+ 168 0016 4FF0FF33 		mov	r3, #-1
+ 169 001a 2246     		mov	r2, r4
+ 170 001c 2946     		mov	r1, r5
+ 171 001e 0848     		ldr	r0, .L14+4
+ 172 0020 FFF7FEFF 		bl	HAL_UART_Transmit
+ 173              	.LVL6:
+  16:Core/Src/main.c **** 		Error_handler();
+ 174              		.loc 1 16 5 view .LVU35
+ 175 0024 40B9     		cbnz	r0, .L13
+ 176              	.L11:
+  19:Core/Src/main.c **** 		(void)HAL_UART_Transmit(&huart2, (uint8_t*) data, length, HAL_MAX_DELAY);
+ 177              		.loc 1 19 2 is_stmt 1 discriminator 1 view .LVU36
+  20:Core/Src/main.c **** 	}
+ 178              		.loc 1 20 3 discriminator 1 view .LVU37
+  20:Core/Src/main.c **** 	}
+ 179              		.loc 1 20 9 is_stmt 0 discriminator 1 view .LVU38
+ 180 0026 4FF0FF33 		mov	r3, #-1
+ 181 002a 2246     		mov	r2, r4
+ 182 002c 0349     		ldr	r1, .L14
+ 183 002e 0968     		ldr	r1, [r1]
+ 184 0030 0348     		ldr	r0, .L14+4
+ 185 0032 FFF7FEFF 		bl	HAL_UART_Transmit
+ 186              	.LVL7:
+  19:Core/Src/main.c **** 		(void)HAL_UART_Transmit(&huart2, (uint8_t*) data, length, HAL_MAX_DELAY);
+ 187              		.loc 1 19 8 is_stmt 1 discriminator 1 view .LVU39
+ 188 0036 F6E7     		b	.L11
+ 189              	.L13:
+  17:Core/Src/main.c **** 	}
+ 190              		.loc 1 17 3 view .LVU40
+ 191 0038 FFF7FEFF 		bl	Error_handler
+ 192              	.LVL8:
+ 193              	.L15:
+ 194              		.align	2
+ 195              	.L14:
+ 196 003c 00000000 		.word	.LANCHOR1
+ 197 0040 00000000 		.word	.LANCHOR0
+ 198              		.cfi_endproc
+ 199              	.LFE130:
+ 201              		.global	data
+ 202              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 203              		.align	2
+ 204              	.LC0:
+ 205 0000 54686520 		.ascii	"The application is running\015\012\000"
+ 205      6170706C 
+ 205      69636174 
+ 205      696F6E20 
+ 205      69732072 
+ 206              		.global	huart2
+ 207              		.section	.bss.huart2,"aw",%nobits
+ 208              		.align	2
+ 209              		.set	.LANCHOR0,. + 0
+ 212              	huart2:
+ 213 0000 00000000 		.space	68
+ARM GAS  /tmp/ccqSJhMy.s 			page 6
+
+
+ 213      00000000 
+ 213      00000000 
+ 213      00000000 
+ 213      00000000 
+ 214              		.section	.data.data,"aw"
+ 215              		.align	2
+ 216              		.set	.LANCHOR1,. + 0
+ 219              	data:
+ 220 0000 00000000 		.word	.LC0
+ 221              		.text
+ 222              	.Letext0:
+ 223              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 224              		.file 3 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h"
+ 225              		.file 4 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 226              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 227              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 228              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 229              		.file 8 "/usr/include/newlib/string.h"
+ARM GAS  /tmp/ccqSJhMy.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/cck5Gsic.s:18     .text.SystemClock_Config:0000000000000000 $t
-     /tmp/cck5Gsic.s:26     .text.SystemClock_Config:0000000000000000 SystemClock_Config
-     /tmp/cck5Gsic.s:40     .text.Error_handler:0000000000000000 $t
-     /tmp/cck5Gsic.s:47     .text.Error_handler:0000000000000000 Error_handler
-     /tmp/cck5Gsic.s:64     .text.UART2_Init:0000000000000000 $t
-     /tmp/cck5Gsic.s:71     .text.UART2_Init:0000000000000000 UART2_Init
-     /tmp/cck5Gsic.s:123    .text.UART2_Init:0000000000000028 $d
-     /tmp/cck5Gsic.s:129    .text.main:0000000000000000 $t
-     /tmp/cck5Gsic.s:136    .text.main:0000000000000000 main
-     /tmp/cck5Gsic.s:169    .bss.huart2:0000000000000000 huart2
-     /tmp/cck5Gsic.s:165    .bss.huart2:0000000000000000 $d
+     /tmp/ccqSJhMy.s:18     .text.SystemClock_Config:0000000000000000 $t
+     /tmp/ccqSJhMy.s:26     .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/ccqSJhMy.s:40     .text.Error_handler:0000000000000000 $t
+     /tmp/ccqSJhMy.s:47     .text.Error_handler:0000000000000000 Error_handler
+     /tmp/ccqSJhMy.s:64     .text.UART2_Init:0000000000000000 $t
+     /tmp/ccqSJhMy.s:71     .text.UART2_Init:0000000000000000 UART2_Init
+     /tmp/ccqSJhMy.s:123    .text.UART2_Init:0000000000000028 $d
+     /tmp/ccqSJhMy.s:129    .text.main:0000000000000000 $t
+     /tmp/ccqSJhMy.s:136    .text.main:0000000000000000 main
+     /tmp/ccqSJhMy.s:196    .text.main:000000000000003c $d
+     /tmp/ccqSJhMy.s:219    .data.data:0000000000000000 data
+     /tmp/ccqSJhMy.s:203    .rodata.str1.4:0000000000000000 $d
+     /tmp/ccqSJhMy.s:212    .bss.huart2:0000000000000000 huart2
+     /tmp/ccqSJhMy.s:208    .bss.huart2:0000000000000000 $d
+     /tmp/ccqSJhMy.s:215    .data.data:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 HAL_UART_Init
 HAL_Init
+strlen
+HAL_UART_Transmit

@@ -1,5 +1,4 @@
 #include "main.h"
-#include "stm32f4xx_hal.h"
 
 void SystemClock_Config(void);
 void UART2_Init(void); 
@@ -7,15 +6,20 @@ void Error_handler(void);
 
 UART_HandleTypeDef huart2;
 
+char *data = "The application is running\r\n";
+
 int main(void) {
-  
-  HAL_Init();
-  SystemClock_Config();
-  UART2_Init();
-  
-  while (1);
-  
-  return 0; 
+	HAL_Init();
+	SystemClock_Config();
+	UART2_Init();
+	uint16_t length = strlen(data);
+	if (HAL_UART_Transmit(&huart2, (uint8_t*) data, length, HAL_MAX_DELAY) != HAL_OK) {
+		Error_handler();
+	}
+	while (1) {
+		(void)HAL_UART_Transmit(&huart2, (uint8_t*) data, length, HAL_MAX_DELAY);
+	}
+	return 0; 
 }
 
 void SystemClock_Config(void) {
@@ -36,6 +40,6 @@ void UART2_Init(void) {
 }
 
 void Error_handler(void) {
-  while(1);
+	while(1);
 }
 
