@@ -6,16 +6,28 @@ void Error_handler(void);
 
 UART_HandleTypeDef huart2;
 
-char *data = "The application is running\r\n";
 
 int main(void) {
 	HAL_Init();
 	SystemClock_Config();
 	UART2_Init();
-	uint16_t length = strlen(data);
-	if (HAL_UART_Transmit(&huart2, (uint8_t*) data, length, HAL_MAX_DELAY) != HAL_OK) {
-		Error_handler();
-	}
+
+	uint8_t command;
+	uint8_t rx_buffer[100];
+	uint32_t count = 0U;
+
+	while(1) {
+		(void)HAL_UART_Receive(&huart2, &command, 1, HAL_MAX_DELAY);
+		if (command == '\r') {
+			break;
+		} else {
+			rx_buffer[count] = command;
+			count++;
+		}
+	} 
+
+	(void)HAL_UART_Transmit(&huart2, (uint8_t *)rx_buffer, count, HAL_MAX_DELAY);
+
 	while (1);
 	return 0; 
 }
