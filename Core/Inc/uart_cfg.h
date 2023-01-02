@@ -12,7 +12,7 @@
 /**
  * UART2 User Configuration
 */
-static UART_HandleTypeDef huart2;
+static UART_HandleTypeDef huart2 = {0};
 void UART2_Init(void);
 void USART2_IRQHandler (void);
 

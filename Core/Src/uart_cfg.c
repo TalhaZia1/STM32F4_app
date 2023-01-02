@@ -2,7 +2,7 @@
 
 /**
  * TODO: High Level Init -> USART Pheripheral
- * Function call in main.c for usage
+ * Function call in main.c @ref UART2_Init()
 */
 
 void UART2_Init(void) {
@@ -33,7 +33,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart) {
          * TX - GPIOA - PIN 2
          * RX - GPIOA - PIN 3 
         */
-        GPIO_InitTypeDef gpio_uart;
+        GPIO_InitTypeDef gpio_uart = {0};
         gpio_uart.Pin = GPIO_PIN_2; 
         gpio_uart.Mode = GPIO_MODE_AF_PP;
         gpio_uart.Pull = GPIO_PULLUP; 
