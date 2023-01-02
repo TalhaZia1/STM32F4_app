@@ -14,5 +14,6 @@
 */
 static UART_HandleTypeDef huart2;
 void UART2_Init(void);
+void USART2_IRQHandler (void);
 
 #endif /* __UART_CFG_H */
