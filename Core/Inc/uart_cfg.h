@@ -2,6 +2,8 @@
 #define __UART_CFG_H
 
 #include "stm32f4xx_hal.h"
+#include <stdio.h>
+#include <string.h>
 
 /**
  * Buffer Size
@@ -12,8 +14,8 @@
 /**
  * UART2 User Configuration
 */
-static UART_HandleTypeDef huart2 = {0};
 void UART2_Init(void);
 void USART2_IRQHandler (void);
+void printWelcomeMessage (void);
 
 #endif /* __UART_CFG_H */

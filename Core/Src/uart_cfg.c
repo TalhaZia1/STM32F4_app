@@ -1,5 +1,7 @@
 #include "uart_cfg.h"
 
+static UART_HandleTypeDef huart2 = {0};
+
 /**
  * TODO: High Level Init -> USART Pheripheral
  * Function call in main.c @ref UART2_Init()
@@ -56,4 +58,23 @@ void USART2_IRQHandler (void) {
     HAL_UART_IRQHandler(&huart2); 
 }
 
+void printWelcomeMessage (void) {
+    char msg[USART2_TX_BUFFER_SIZE];
 
+	memset(msg,0,sizeof(msg));
+	sprintf(msg,"SYSCLK : %ldHz\r\n",HAL_RCC_GetSysClockFreq());
+	HAL_UART_Transmit(&huart2,(uint8_t*)msg,strlen(msg),HAL_MAX_DELAY);
+
+	memset(msg,0,sizeof(msg));
+	sprintf(msg,"HCLK   : %ldHz\r\n",HAL_RCC_GetHCLKFreq());
+	HAL_UART_Transmit(&huart2,(uint8_t*)msg,strlen(msg),HAL_MAX_DELAY);
+
+	memset(msg,0,sizeof(msg));
+	sprintf(msg,"PCLK1  : %ldHz\r\n",HAL_RCC_GetPCLK1Freq());
+	HAL_UART_Transmit(&huart2,(uint8_t*)msg,strlen(msg),HAL_MAX_DELAY);
+
+	memset(msg,0,sizeof(msg));
+	sprintf(msg,"PCLK2  : %ldHz\r\n",HAL_RCC_GetPCLK2Freq());
+	HAL_UART_Transmit(&huart2,(uint8_t*)msg,strlen(msg),HAL_MAX_DELAY);
+    
+}
