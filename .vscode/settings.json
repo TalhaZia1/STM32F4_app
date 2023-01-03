@@ -14,6 +14,7 @@
         "console.h": "c",
         "stm32f4xx_hal_flash.h": "c",
         "clock_cfg.h": "c",
-        "uart_cfg.h": "c"
+        "uart_cfg.h": "c",
+        "stm32f4xx_hal_tim.h": "c"
     }
 }
