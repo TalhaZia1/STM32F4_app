@@ -18,8 +18,9 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim) {
 }
 
 void TIMER6_Start(void) {
-    HAL_TIM_Base_Start(&htimer6);
+    (void)HAL_TIM_Base_Start(&htimer6);
 }
+
 
 void TIMER6_ledToggle_Polling(void) {
 	static uint8_t count = 0U; 
@@ -30,5 +31,24 @@ void TIMER6_ledToggle_Polling(void) {
 		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
 		count = 0U;
 	}
+}
 
+void TIMER6_Start_IT(void) {
+    (void)HAL_TIM_Base_Start_IT(&htimer6);
+}
+
+/**
+ * TIM6 - IRQ Configuration
+*/
+void TIM6_DAC_IRQHandler (void) {
+	HAL_TIM_IRQHandler(&htimer6);
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+	static uint8_t count = 0U;
+	count++;
+	if (count == 10U) {
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+		count = 0U;
+	} 
 }
