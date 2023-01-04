@@ -84,3 +84,13 @@ void PLL_Clock_Config(void) {
 	HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
 	HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
 }
+
+void LSE_Clock_Config(void) {
+    RCC_OscInitTypeDef osc_init;
+	osc_init.OscillatorType = RCC_OSCILLATORTYPE_LSE;
+	osc_init.LSEState = RCC_LSE_ON;  
+	if (HAL_RCC_OscConfig(&osc_init) != HAL_OK) {
+		while(1);
+	}
+	HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_LSE, RCC_MCODIV_1);
+}
