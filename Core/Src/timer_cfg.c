@@ -1,15 +1,15 @@
 #include "timer_cfg.h"
 
-static TIM_HandleTypeDef htimer6;
-static TIM_HandleTypeDef htimer2; 
+static TIM_HandleTypeDef htimer6_Base;
+static TIM_HandleTypeDef htimer2_IC; 
 static uint32_t input_captures[3] ={0};
 
 /* TIM6 High Level Init */
 void TIMER6_Init(void) {
-	htimer6.Instance = TIM6;
-	htimer6.Init.Prescaler = 24;
-	htimer6.Init.Period = 64000-1; 
-	(void)HAL_TIM_Base_Init(&htimer6);
+	htimer6_Base.Instance = TIM6;
+	htimer6_Base.Init.Prescaler = 24;
+	htimer6_Base.Init.Period = 64000-1; 
+	(void)HAL_TIM_Base_Init(&htimer6_Base);
 }
 
 /* TIM6 Low Level Init */
@@ -22,7 +22,7 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim) {
 }
 
 void TIMER6_Start(void) {
-    (void)HAL_TIM_Base_Start(&htimer6);
+    (void)HAL_TIM_Base_Start(&htimer6_Base);
 }
 
 
@@ -38,14 +38,14 @@ void TIMER6_ledToggle_Polling(void) {
 }
 
 void TIMER6_Start_IT(void) {
-    (void)HAL_TIM_Base_Start_IT(&htimer6);
+    (void)HAL_TIM_Base_Start_IT(&htimer6_Base);
 }
 
 /**
  * TIM6 - IRQ Configuration
 */
 void TIM6_DAC_IRQHandler (void) {
-	HAL_TIM_IRQHandler(&htimer6);
+	HAL_TIM_IRQHandler(&htimer6_Base);
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
@@ -57,18 +57,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	} 
 }
 
-void TIMER2_Init(void) {
+void TIMER2_Init_IC(void) {
 	TIM_IC_InitTypeDef timer2_IC_cfg; 
-	htimer2.Instance = TIM2; 
-	htimer2.Init.CounterMode = TIM_COUNTERMODE_UP; 
-	htimer2.Init.Period = 0xFFFFFFFF; 
-	htimer2.Init.Prescaler = 1;
-	(void)HAL_TIM_IC_Init(&htimer2);
+	htimer2_IC.Instance = TIM2; 
+	htimer2_IC.Init.CounterMode = TIM_COUNTERMODE_UP; 
+	htimer2_IC.Init.Period = 0xFFFFFFFF; 
+	htimer2_IC.Init.Prescaler = 1;
+	(void)HAL_TIM_IC_Init(&htimer2_IC);
 	timer2_IC_cfg.ICFilter = 0; 
 	timer2_IC_cfg.ICPolarity = TIM_ICPOLARITY_RISING;
 	timer2_IC_cfg.ICPrescaler = TIM_ICPSC_DIV1;
 	timer2_IC_cfg.ICSelection = TIM_ICSELECTION_DIRECTTI;
-	HAL_TIM_IC_ConfigChannel(&htimer2, &timer2_IC_cfg, TIM_CHANNEL_1);
+	HAL_TIM_IC_ConfigChannel(&htimer2_IC, &timer2_IC_cfg, TIM_CHANNEL_1);
 }
 
 
@@ -88,7 +88,7 @@ void HAL_TIM_IC_MspInit(TIM_HandleTypeDef *htim) {
 }
 
 void TIM2_IRQHandler(void) {
-	HAL_TIM_IRQHandler(&htimer2);
+	HAL_TIM_IRQHandler(&htimer2_IC);
 }
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
@@ -108,6 +108,6 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 	} 
 }
 
-void TIMER2_Start_IT(void) {
-    (void)HAL_TIM_IC_Start_IT(&htimer2, TIM_CHANNEL_1);
+void TIMER2_Start_IC(void) {
+    (void)HAL_TIM_IC_Start_IT(&htimer2_IC, TIM_CHANNEL_1);
 }

@@ -9,6 +9,6 @@ void TIMER6_ledToggle_Polling(void);
 void TIMER6_Start_IT(void);
 
 void TIMER2_Init_IC(void); 
-void TIMER2_Start_IT(void);
+void TIMER2_Start_IC(void);
 
 #endif /* __TIMER_CFG_H */
