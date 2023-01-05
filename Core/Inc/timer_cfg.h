@@ -14,4 +14,7 @@ void TIMER2_Start_IC(void);
 void TIMER2_Init_OC(void); 
 void TIMER2_Start_OC(void);
 
+void TIMER2_Init_PWM(void);
+void TIMER2_Start_PWM(void);
+
 #endif /* __TIMER_CFG_H */
