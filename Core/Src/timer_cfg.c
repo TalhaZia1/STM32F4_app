@@ -7,6 +7,11 @@ static TIM_HandleTypeDef htimer2_PWM;
 static uint32_t input_captures[3] ={0};
 static uint32_t ccr_content;
 
+static void TIMER2_PWM_ChOutput(void);
+static void TIMER2_Init_PWM_ChOutput(void);
+static void TIMER2_PWM_ledBrightness(void);
+static void TIMER2_Init_PWM_ledBrightness(void);
+
 /**
  * TIMERs BASIC
 */
@@ -207,6 +212,12 @@ void TIMER2_Init_PWM(void) {
 	htimer2_PWM.Init.Period = 10000-1;
 	htimer2_PWM.Init.Prescaler = 4;
 	(void)HAL_TIM_PWM_Init(&htimer2_PWM);
+	//TIMER2_Init_PWM_ChOutput();
+	TIMER2_Init_PWM_ledBrightness();
+
+}
+
+static void TIMER2_Init_PWM_ChOutput(void) {
 	TIM_OC_InitTypeDef tim2PWM_init = {0};
 	tim2PWM_init.OCMode = TIM_OCMODE_PWM1;
 	tim2PWM_init.OCPolarity = TIM_OCPOLARITY_HIGH;
@@ -220,24 +231,18 @@ void TIMER2_Init_PWM(void) {
 	(void)HAL_TIM_PWM_ConfigChannel(&htimer2_PWM, &tim2PWM_init, TIM_CHANNEL_4);
 }
 
+static void TIMER2_Init_PWM_ledBrightness(void) {
+	TIM_OC_InitTypeDef tim2PWMLED_init = {0};
+	tim2PWMLED_init.OCMode = TIM_OCMODE_PWM1;
+	tim2PWMLED_init.OCPolarity = TIM_OCPOLARITY_HIGH;
+	tim2PWMLED_init.Pulse = htimer2_PWM.Init.Period * 0.05; /*50% Duty Cycle */
+	(void)HAL_TIM_PWM_ConfigChannel(&htimer2_PWM, &tim2PWMLED_init, TIM_CHANNEL_1);
+}
+
 void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim) {
 	if(htim->Instance == TIM2) {
-		__HAL_RCC_TIM2_CLK_ENABLE();
-		__HAL_RCC_GPIOA_CLK_ENABLE();
-		GPIO_InitTypeDef tim2ch1_gpios = {0};
-		tim2ch1_gpios.Pin = GPIO_PIN_0 | GPIO_PIN_1;
-		tim2ch1_gpios.Mode = GPIO_MODE_AF_PP;
-		tim2ch1_gpios.Pull = GPIO_NOPULL;
-		tim2ch1_gpios.Speed = GPIO_SPEED_FREQ_LOW;
-		tim2ch1_gpios.Alternate = GPIO_AF1_TIM2;
-		HAL_GPIO_Init(GPIOA, &tim2ch1_gpios);
-		__HAL_RCC_GPIOB_CLK_ENABLE();
-		tim2ch1_gpios.Pin = GPIO_PIN_2 | GPIO_PIN_10;
-		tim2ch1_gpios.Mode = GPIO_MODE_AF_PP;
-		tim2ch1_gpios.Pull = GPIO_NOPULL;
-		tim2ch1_gpios.Speed = GPIO_SPEED_FREQ_LOW;
-		tim2ch1_gpios.Alternate = GPIO_AF1_TIM2;
-		HAL_GPIO_Init(GPIOB, &tim2ch1_gpios);
+		//TIMER2_PWM_ChOutput();
+		TIMER2_PWM_ledBrightness();
 		HAL_NVIC_SetPriority(TIM2_IRQn, 15, 0);
 		HAL_NVIC_EnableIRQ(TIM2_IRQn);
 	}
@@ -248,6 +253,42 @@ void TIMER2_Start_PWM(void) {
     (void)HAL_TIM_PWM_Start(&htimer2_PWM, TIM_CHANNEL_2);
     (void)HAL_TIM_PWM_Start(&htimer2_PWM, TIM_CHANNEL_3);
     (void)HAL_TIM_PWM_Start(&htimer2_PWM, TIM_CHANNEL_4);
+}
+
+static void TIMER2_PWM_ChOutput(void) {
+	__HAL_RCC_TIM2_CLK_ENABLE();
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+	GPIO_InitTypeDef tim2ch1_gpios = {0};
+	tim2ch1_gpios.Pin = GPIO_PIN_0 | GPIO_PIN_1;
+	tim2ch1_gpios.Mode = GPIO_MODE_AF_PP;
+	tim2ch1_gpios.Pull = GPIO_NOPULL;
+	tim2ch1_gpios.Speed = GPIO_SPEED_FREQ_LOW;
+	tim2ch1_gpios.Alternate = GPIO_AF1_TIM2;
+	HAL_GPIO_Init(GPIOA, &tim2ch1_gpios);
+	__HAL_RCC_GPIOB_CLK_ENABLE();
+	tim2ch1_gpios.Pin = GPIO_PIN_2 | GPIO_PIN_10;
+	tim2ch1_gpios.Mode = GPIO_MODE_AF_PP;
+	tim2ch1_gpios.Pull = GPIO_NOPULL;
+	tim2ch1_gpios.Speed = GPIO_SPEED_FREQ_LOW;
+	tim2ch1_gpios.Alternate = GPIO_AF1_TIM2;
+	HAL_GPIO_Init(GPIOB, &tim2ch1_gpios);
+}
+
+static void TIMER2_PWM_ledBrightness(void) {
+	__HAL_RCC_TIM2_CLK_ENABLE();
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+	GPIO_InitTypeDef tim2ch1_gpio = {0};
+	tim2ch1_gpio.Pin = GPIO_PIN_5;
+	tim2ch1_gpio.Mode = GPIO_MODE_AF_PP;
+	tim2ch1_gpio.Pull = GPIO_NOPULL;
+	tim2ch1_gpio.Speed = GPIO_SPEED_FREQ_LOW;
+	tim2ch1_gpio.Alternate = GPIO_AF1_TIM2;
+	HAL_GPIO_Init(GPIOA, &tim2ch1_gpio);
+}
+
+void changeBrightness(uint16_t brightness) {
+	__HAL_TIM_SET_COMPARE(&htimer2_PWM, TIM_CHANNEL_1, brightness);
+	HAL_Delay(1);
 }
 
 /**

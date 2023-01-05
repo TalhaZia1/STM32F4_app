@@ -48,8 +48,8 @@ void HSE_Clock_Config(void) {
 
 void PLL_Clock_Config(void) {
 
-    RCC_OscInitTypeDef osc_init;
-	RCC_ClkInitTypeDef clk_init;
+    RCC_OscInitTypeDef osc_init = {0};
+	RCC_ClkInitTypeDef clk_init = {0};
 	
 	osc_init.OscillatorType = RCC_OSCILLATORTYPE_HSI;
 	osc_init.HSIState = RCC_HSI_ON;  
