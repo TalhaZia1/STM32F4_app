@@ -10,6 +10,7 @@ int main(void) {
 	GPIO_LED_Init();
 	TIMER6_Init();
 	TIMER6_Start_IT();
+	printLOG();
 	while (1);
 	return 0; 
 }

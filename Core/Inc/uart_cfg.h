@@ -15,7 +15,7 @@
  * UART2 User Configuration
 */
 void UART2_Init(void);
-void USART2_IRQHandler (void);
-void printWelcomeMessage (void);
+void printWelcomeMessage(void);
+void printLOG(void);
 
 #endif /* __UART_CFG_H */
