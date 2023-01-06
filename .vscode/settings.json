@@ -17,6 +17,8 @@
         "uart_cfg.h": "c",
         "stm32f4xx_hal_tim.h": "c",
         "gpio_cfg.h": "c",
-        "timer_cfg.h": "c"
+        "timer_cfg.h": "c",
+        "stm32f4xx_hal_pwr.h": "c",
+        "low_power_cfg.h": "c"
     }
 }

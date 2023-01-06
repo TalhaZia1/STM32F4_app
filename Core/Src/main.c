@@ -2,6 +2,7 @@
 #include "gpio_cfg.h"
 #include "uart_cfg.h"
 #include "timer_cfg.h"
+#include "low_power_cfg.h"
 
 int main(void) {
 	HAL_Init();
@@ -10,7 +11,7 @@ int main(void) {
 	GPIO_LED_Init();
 	TIMER6_Init();
 	TIMER6_Start_IT();
-	printLOG();
+	sleepOnExitEnable();
 	while (1);
 	return 0; 
 }
