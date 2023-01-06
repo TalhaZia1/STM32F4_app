@@ -5,6 +5,7 @@ static TIM_HandleTypeDef htimer2_IC;
 static TIM_HandleTypeDef htimer2_OC; 
 static TIM_HandleTypeDef htimer2_PWM; 
 static uint32_t input_captures[3] ={0};
+static uint16_t brightness = 0U;
 static uint32_t ccr_content;
 
 static void TIMER2_PWM_ChOutput(void);
@@ -289,6 +290,17 @@ static void TIMER2_PWM_ledBrightness(void) {
 void changeBrightness(uint16_t brightness) {
 	__HAL_TIM_SET_COMPARE(&htimer2_PWM, TIM_CHANNEL_1, brightness);
 	HAL_Delay(1);
+}
+
+void brightnessControl(void) {
+	while (brightness <= 800U) {
+		changeBrightness(brightness);
+		brightness++;
+	}
+	while (0U < brightness) {
+		changeBrightness(brightness);
+		brightness--;
+	}
 }
 
 /**

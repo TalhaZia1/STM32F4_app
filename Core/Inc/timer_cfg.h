@@ -18,5 +18,6 @@ void TIMER2_Init_PWM(void);
 void TIMER2_Start_PWM(void);
 
 void changeBrightness(uint16_t brightness);
+void brightnessControl(void);
 
 #endif /* __TIMER_CFG_H */
