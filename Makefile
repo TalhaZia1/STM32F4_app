@@ -12,6 +12,7 @@ Core/Src/main.c \
 Core/Src/uart_cfg.c \
 Core/Src/clock_cfg.c \
 Core/Src/gpio_cfg.c \
+Core/Src/timer_cfg.c \
 Core/Src/stm32f4xx_it.c \
 Core/Src/stm32f4xx_hal_msp.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c \
