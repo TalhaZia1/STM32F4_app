@@ -3,3 +3,11 @@
 void sleepOnExitEnable(void) {
     HAL_PWR_EnableSleepOnExit();
 }
+
+void WFIEnable(void) {
+    __WFI();
+}
+
+void WFEEnable(void) {
+    __WFE();
+}
