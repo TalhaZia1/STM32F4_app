@@ -11,3 +11,7 @@ void WFIEnable(void) {
 void WFEEnable(void) {
     __WFE();
 }
+
+void overDrivePWREnable(void) {
+    (void)HAL_PWREx_EnableOverDrive();
+}

@@ -9,15 +9,22 @@
 void sleepOnExitEnable(void);
 
 /**
- * Enters in Wait for Interrupt Power Saving Mode
+ * Wait for Interrupt -> Power Saving Mode
 */
 void WFIEnable(void);
 
 /**
  * isEventRegSet == True -> Clears eventReg
  * isEventRegSet == False -> goes to Power Saving Mode
+ * TODO: WFE instruction use in Reference Manual
 */
 void WFEEnable(void);
 
+/**
+ * Requred for 180MHz clock
+ * @ref stm32f4xx_hal_pwr_ex.h
+ * @ref stm32f4xx_hal_pwr.h
+*/
+void overDrivePWREnable(void);
 
 #endif /* __LOW_POWER_CFG_H */
