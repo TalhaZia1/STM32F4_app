@@ -1,20 +1,13 @@
 #include "stm32f4xx_hal.h"
-#include "clock_cfg.h"
-#include "timer_cfg.h"
 #include "gpio_cfg.h"
-#include "uart_cfg.h"
+#include "low_power_cfg.h"
 
 int main(void) {
 	HAL_Init();
-	PLL_Clock_Config();
-	UART2_Init();
-	printWelcomeMessage();
-	TIMER2_Init_PWM();
-	TIMER2_Start_PWM();
+	GPIO_LED_Init();
+	GPIO_BTN_IT_Init();
 	while (1) {
-		brightnessControl();
+		WFIEnable();
 	}
 	return 0; 
 }
-
-

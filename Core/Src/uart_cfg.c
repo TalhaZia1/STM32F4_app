@@ -78,3 +78,10 @@ void printWelcomeMessage (void) {
 	HAL_UART_Transmit(&huart2,(uint8_t*)msg,strlen(msg),HAL_MAX_DELAY);
     
 }
+
+void printLOG(void) {
+    char msg[USART2_TX_BUFFER_SIZE];
+	memset(msg,0,sizeof(msg));
+	sprintf(msg,"Sleep Mode Testing\r\n");
+	HAL_UART_Transmit(&huart2,(uint8_t*)msg,strlen(msg),HAL_MAX_DELAY);
+}

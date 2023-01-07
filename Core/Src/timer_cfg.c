@@ -17,6 +17,11 @@ static void TIMER2_Init_PWM_ledBrightness(void);
  * TIMERs BASIC
 */
 
+/**
+ * Timer Clk = 16MHz 
+ * Period = 100milisec
+ * LED Toggling every 1sec 
+*/
 void TIMER6_Init(void) {
 	htimer6_Base.Instance = TIM6;
 	htimer6_Base.Init.Prescaler = 24;
@@ -213,9 +218,10 @@ void TIMER2_Init_PWM(void) {
 	htimer2_PWM.Init.Period = 10000-1;
 	htimer2_PWM.Init.Prescaler = 4;
 	(void)HAL_TIM_PWM_Init(&htimer2_PWM);
-	//TIMER2_Init_PWM_ChOutput();
+	/* one PWM has to be disabled for use in main.c */
+	TIMER2_Init_PWM_ChOutput();
 	TIMER2_Init_PWM_ledBrightness();
-
+	
 }
 
 static void TIMER2_Init_PWM_ChOutput(void) {
@@ -242,7 +248,8 @@ static void TIMER2_Init_PWM_ledBrightness(void) {
 
 void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim) {
 	if(htim->Instance == TIM2) {
-		//TIMER2_PWM_ChOutput();
+		/* One Init has to be disabled for use in main.c */
+		TIMER2_PWM_ChOutput();
 		TIMER2_PWM_ledBrightness();
 		HAL_NVIC_SetPriority(TIM2_IRQn, 15, 0);
 		HAL_NVIC_EnableIRQ(TIM2_IRQn);
@@ -307,9 +314,9 @@ void brightnessControl(void) {
  * TIMER2 IRQ Handler
 */
 void TIM2_IRQHandler(void) {
-	//HAL_TIM_IRQHandler(&htimer2_IC);
+	HAL_TIM_IRQHandler(&htimer2_IC);
 	HAL_TIM_IRQHandler(&htimer2_OC);
-	//HAL_TIM_IRQHandler(&htimer2_PWM);
+	HAL_TIM_IRQHandler(&htimer2_PWM);
 }
 
 void TIM6_DAC_IRQHandler (void) {
