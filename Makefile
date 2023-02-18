@@ -33,7 +33,14 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c \
-Core/Src/system_stm32f4xx.c  
+Core/Src/system_stm32f4xx.c \
+FreeRTOS-Kernel/event_groups.c \
+FreeRTOS-Kernel/list.c \
+FreeRTOS-Kernel/queue.c \
+FreeRTOS-Kernel/stream_buffer.c \
+FreeRTOS-Kernel/tasks.c \
+FreeRTOS-Kernel/timers.c  
+
 
 # ASM sources
 ASM_SOURCES =  \
