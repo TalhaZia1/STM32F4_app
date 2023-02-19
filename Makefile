@@ -2,45 +2,56 @@ TARGET = STM32F4_APP
 DEBUG = 1
 OPT = -Og
 BUILD_DIR = build
+FREERTOS_PATH = FreeRTOS-Kernel
+APP_PATH = Core/Src
+HAL_LIB_PATH = Drivers/STM32F4xx_HAL_Driver/Src
 
 ######################################
 # source
 ######################################
 # C sources
 C_SOURCES =  \
-Core/Src/main.c \
-Core/Src/uart_cfg.c \
-Core/Src/clock_cfg.c \
-Core/Src/gpio_cfg.c \
-Core/Src/timer_cfg.c \
-Core/Src/low_power_cfg.c \
-Core/Src/bkup_SRAM_cfg.c \
-Core/Src/stm32f4xx_it.c \
-Core/Src/stm32f4xx_hal_msp.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c \
-Core/Src/system_stm32f4xx.c \
-FreeRTOS-Kernel/event_groups.c \
-FreeRTOS-Kernel/list.c \
-FreeRTOS-Kernel/queue.c \
-FreeRTOS-Kernel/stream_buffer.c \
-FreeRTOS-Kernel/tasks.c \
-FreeRTOS-Kernel/timers.c  
+	$(APP_PATH)/main.c \
+	$(APP_PATH)/stm32f4xx_it.c \
+	$(APP_PATH)/stm32f4xx_hal_msp.c \
+	$(APP_PATH)/system_stm32f4xx.c \
+	$(APP_PATH)/uart_cfg.c \
+	$(APP_PATH)/clock_cfg.c \
+	$(APP_PATH)/gpio_cfg.c \
+	$(APP_PATH)/timer_cfg.c \
+	$(APP_PATH)/low_power_cfg.c \
+	$(APP_PATH)/bkup_SRAM_cfg.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_tim.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_tim_ex.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_rcc.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_rcc_ex.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_flash.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_flash_ex.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_flash_ramfunc.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_gpio.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_dma_ex.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_dma.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_pwr.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_pwr_ex.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_cortex.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_exti.c \
+	$(HAL_LIB_PATH)/stm32f4xx_hal_uart.c 
 
+# FreeRTOS source files
+FREERTOS_SRC_FILES =  \
+    $(FREERTOS_PATH)/portable/Common/mpu_wrappers.c \
+    $(FREERTOS_PATH)/portable/GCC/ARM_CM4F/port.c \
+    $(FREERTOS_PATH)/portable/MemMang/heap_4.c \
+	$(FREERTOS_PATH)/event_groups.c \
+	$(FREERTOS_PATH)/list.c \
+	$(FREERTOS_PATH)/queue.c \
+	$(FREERTOS_PATH)/stream_buffer.c \
+	$(FREERTOS_PATH)/tasks.c \
+	$(FREERTOS_PATH)/timers.c 
+
+# Add FreeRTOS source files to the list of sources
+C_SOURCES += $(FREERTOS_SRC_FILES)
 
 # ASM sources
 ASM_SOURCES =  \
@@ -90,25 +101,32 @@ C_DEFS =  \
 -DUSE_HAL_DRIVER \
 -DSTM32F446xx
 
+# Compiler flags and options for FreeRTOS
+FREERTOS_CFLAGS = -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -Wall -Wextra -std=gnu11
 
 # AS includes
 AS_INCLUDES = 
 
 # C includes
 C_INCLUDES =  \
--ICore/Inc \
--IDrivers/STM32F4xx_HAL_Driver/Inc \
--IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy \
--IDrivers/CMSIS/Device/ST/STM32F4xx/Include \
--IDrivers/CMSIS/Include \
--IFreeRTOS-Kernel/include \
--IFreeRTOS-Kernel/portable/GCC/ARM_CM4F
+	-ICore/Inc \
+	-IDrivers/STM32F4xx_HAL_Driver/Inc \
+	-IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy \
+	-IDrivers/CMSIS/Device/ST/STM32F4xx/Include \
+	-IDrivers/CMSIS/Include 
 
+# FreeRTOS include files
+FREERTOS_INC_FILES =  \
+    -I$(FREERTOS_PATH)/include \
+    -I$(FREERTOS_PATH)/portable/GCC/ARM_CM4F
+
+# Add FreeRTOS include directories to the list of include directories
+C_INCLUDES += $(FREERTOS_INC_FILES)
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
 
-CFLAGS += $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
+CFLAGS += $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) $(FREERTOS_CFLAGS) -Wall -fdata-sections -ffunction-sections
 
 ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2
