@@ -21,9 +21,9 @@ int main(void) {
 }
 
 static void task1_handler(void* parameter) {
-
+	(void)parameter;
 }
 
 static void task2_handler(void* parameter) {
-
+	(void)parameter;
 }

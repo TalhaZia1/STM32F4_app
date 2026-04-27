@@ -25,4 +25,9 @@
         "portmacro.h": "c",
         "freertosconfig.h": "c"
     }
+    "workbench.colorCustomizations": {
+        "editor.background": "#000050"
+    }
+    "window.zoomLevel": -0.18
+    "editor.cursorStyle": "underline"
 }
